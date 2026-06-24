@@ -132,6 +132,8 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/fill_admission_scores_from_rank.py` to fill missing admission scores from same-year rank bands when an official投档 table publishes rank but not score.
 - Use `scripts/fill_admission_ranks_from_score.py` to fill missing admission ranks from same-year score bands when an official投档 table publishes score but not rank.
 - Use `scripts/audit_data.py` to verify data coverage before using recommendations for real candidates.
+- Use `scripts/audit_guangdong_46_coverage.py` to verify the Guangdong 46 public-undergraduate target scope, per-school major-score row coverage, official-vs-aggregator status, and per-track major-profile gaps before saying Guangdong public本科 coverage is complete.
+- Use `scripts/audit_national_coverage.py` to verify the 31-province nationwide roadmap, current usable pilot data directories, source-discovery-only provinces, and 掌上高考 ID inventory before saying national coverage is ready.
 - Use `scripts/run_advisor.py` as the simplest interactive or low-parameter entry point.
 - Use `scripts/recommend.py` to generate reproducible school and major recommendations.
 - `assets/data/source_registry.csv` records known official source entry points and verification notes.

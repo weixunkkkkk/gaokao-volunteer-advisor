@@ -140,7 +140,21 @@ School-site rows with `major_name` are more precise than province-level院校专
 Recommendation commands default to ordinary broadly eligible rows and exclude提前批、专项、定向、艺术体育等特殊计划. Use `--include-special-plans` only when the candidate is explicitly checking those plans and can satisfy eligibility restrictions.
 The Guangdong public-undergraduate target scope from `https://www.dxsbb.com/news/51305.html` is stored in `assets/source-discovery/guangdong/target_public_undergraduate_schools_2026.csv`; use it as a coverage checklist. Do not expand the scope to ordinary专科院校; for new职业技术大学 entries, import only本科层次 admission rows.
 Use `references/guangdong-schools-inventory.md`, `references/special-schools-inventory.md`, and `references/supplementary-schools-data.md` as human-readable collection checklists. They may mention official pages and aggregator-discovered clues. Official sources remain preferred; aggregator rows are allowed when they fill missing本科 data, but row-level `source_name`/`source_url` must point to the aggregator and `notes` must include `聚合站来源，待官方复核`. Current Guangdong coverage is 46 public undergraduate schools: 28 school-official complete imports plus 18 aggregator/API or Workbuddy supplemental imports that still need official-source review. After importing major-score rows, run `scripts/sync_major_profiles_from_admissions.py` so `majors.csv` contains employment outlook and learning-difficulty profiles for every clean major name observed in Guangdong admission records.
+
+Run the dedicated Guangdong 46-school audit before claiming the Guangdong public-undergraduate scope is complete:
+
+```bash
+python3 scripts/audit_guangdong_46_coverage.py
+```
+
 Use `references/national-coverage-plan.md` for the nationwide expansion roadmap, and use `assets/source-discovery/national/province_manifest.csv` as the structured 31-province status tracker. A province is usable for recommendations only after its own data directory passes `scripts/audit_data.py` for the target years.
+
+Run the national coverage audit to distinguish usable pilot provinces from roadmap/source-discovery-only entries:
+
+```bash
+python3 scripts/audit_national_coverage.py
+```
+
 Use `scripts/export_gaokao_cn_school_ids.py` to refresh `assets/source-discovery/national/gaokao_cn_school_ids.csv` when doing national 掌上高考 supplemental imports. Use `assets/source-discovery/national/gaokao_cn_province_id_map.csv` to choose the correct `--province-id`, then run `scripts/import_gaokao_cn_major_scores.py` with `--schools-csv` against a province-specific data directory. Example:
 
 ```bash
