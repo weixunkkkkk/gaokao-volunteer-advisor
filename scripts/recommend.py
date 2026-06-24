@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import statistics
 from dataclasses import dataclass
 from pathlib import Path
@@ -56,6 +57,22 @@ def as_int(value: str | None) -> int | None:
 
 def norm(value: str | None) -> str:
     return (value or "").strip()
+
+
+def normalize_major_name(value: str | None) -> str:
+    text = norm(value)
+    text = text.replace("〈", "（").replace("〉", "）").replace("《", "（").replace("》", "）")
+    text = re.sub(r"^[/\s]+", "", text)
+    text = re.sub(r"^[A-Z]?\d{2,4}[.、\-\s]*", "", text)
+    text = re.sub(r"[（(【\[].*$", "", text)
+    text = re.sub(r"\d+年?$", "", text)
+    text = re.sub(r"\d+$", "", text)
+    text = text.replace("（", "").replace("）", "")
+    text = re.sub(r"\s+", "", text)
+    text = text.strip(" /-—_，,；;:：")
+    if text.endswith("师范"):
+        text = text[:-2]
+    return text
 
 
 def load_admissions(data_dir: Path) -> list[AdmissionRecord]:
@@ -303,10 +320,14 @@ def match_majors(data_dir: Path, interests_raw: str, limit: int) -> list[dict[st
 
     matches: list[tuple[int, dict[str, str]]] = []
     for row in read_csv(data_dir / "majors.csv"):
+        major_name = norm(row.get("major_name"))
+        major_key = major_name.lower()
         keywords = [item.strip().lower() for item in norm(row.get("interest_keywords")).split("|") if item.strip()]
         score = 0
         for interest in interests:
-            if interest in keywords:
+            if interest and (interest in major_key or major_key == interest):
+                score += 10
+            elif interest in keywords:
                 score += 3
             elif any(interest in keyword or keyword in interest for keyword in keywords):
                 score += 1
@@ -315,6 +336,44 @@ def match_majors(data_dir: Path, interests_raw: str, limit: int) -> list[dict[st
 
     matches.sort(key=lambda item: item[0], reverse=True)
     return [item[1] for item in matches[:limit]]
+
+
+def load_major_profiles(data_dir: Path) -> dict[str, dict[str, str]]:
+    profiles: dict[str, dict[str, str]] = {}
+    for row in read_csv(data_dir / "majors.csv"):
+        key = normalize_major_name(row.get("major_name"))
+        if key:
+            profiles[key] = {field: norm(value) for field, value in row.items()}
+    return profiles
+
+
+def major_profile_note(major_name: str, profiles: dict[str, dict[str, str]]) -> str:
+    key = normalize_major_name(major_name)
+    if not key:
+        return ""
+    profile = profiles.get(key)
+    if not profile:
+        for candidate_key, candidate in profiles.items():
+            if key in candidate_key or candidate_key in key:
+                profile = candidate
+                break
+    if not profile:
+        return ""
+    outlook = profile.get("employment_outlook", "")
+    roles = profile.get("typical_roles", "")
+    if roles:
+        return f"{outlook}；常见去向：{roles}"
+    return outlook
+
+
+def attach_major_profiles(
+    recommendations: list[dict[str, object]],
+    profiles: dict[str, dict[str, str]],
+) -> list[dict[str, object]]:
+    for item in recommendations:
+        major_name = str(item.get("major_name") or "")
+        item["major_profile"] = major_profile_note(major_name, profiles) if major_name else ""
+    return recommendations
 
 
 def parse_target_years(raw: str) -> list[int]:
@@ -550,12 +609,13 @@ def render_markdown(result: dict[str, object]) -> str:
                     str(item.get("median_score") or "-"),
                     str(item.get("note") or "-"),
                     str(item.get("data_precision") or "-"),
+                    str(item.get("major_profile") or "-"),
                     ", ".join(str(year) for year in item.get("years", [])),
                     ", ".join(item.get("source_names", [])) or "-",
                 ]
             )
         lines.append("## 已导入专业录取线匹配")
-        lines.append(markdown_table(rows, ["院校", "专业", "批次/类型/专业组", "档位", "历史中位位次", "历史中位分", "判断", "数据精度", "年份", "来源"]))
+        lines.append(markdown_table(rows, ["院校", "专业", "批次/类型/专业组", "档位", "历史中位位次", "历史中位分", "判断", "数据精度", "专业参考", "年份", "来源"]))
         lines.append("")
 
     if major_matches:
@@ -601,6 +661,8 @@ def build_result(args: argparse.Namespace) -> dict[str, object]:
         rank,
         args.include_risky,
     )
+    major_profiles = load_major_profiles(data_dir)
+    recommendations = attach_major_profiles(recommendations, major_profiles)
     result = {
         "input": {
             "province": args.province,

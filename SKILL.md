@@ -87,7 +87,8 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/normalize_data.py` to convert raw official CSV/XLSX tables into the standard CSV schema.
 - Use `scripts/pdf_table_to_csv.py` to convert official PDF tables into the standard CSV schema.
 - Use `scripts/html_table_to_csv.py` to convert official HTML tables into raw CSV before normalizing.
-- Use `scripts/sync_major_reference.py` to sync `references/major-reference.md` into each data directory's `majors.csv`.
+- Use `scripts/sync_major_reference.py` to sync manually curated `references/major-reference.md` rows into each data directory's `majors.csv`.
+- Use `scripts/sync_major_profiles_from_admissions.py` after importing Guangdong major-score rows to backfill `majors.csv` profiles for every clean major name that appears in `admission_records.csv`; these generated rows are general major-family guidance, not a substitute for checking a school's培养方案 and就业质量报告.
 - Use `scripts/export_gaokao_cn_school_ids.py` to refresh the local 掌上高考 school-ID list for nationwide API-based supplemental imports.
 - Use `scripts/import_scut_major_scores.py` to import 华南理工大学 official school-site major-level scores into Guangdong pilot data.
 - Use `scripts/import_jnu_major_scores.py` to import 暨南大学 official Guangdong major-level scores into Guangdong pilot data.
