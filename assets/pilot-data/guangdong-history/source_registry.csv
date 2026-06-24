@@ -14,3 +14,13 @@ province,source_type,source_name,url,verified_date,notes
 广东,major_admission,暨南大学广东录取分数线,https://zsb.jnu.edu.cn/2016/1206/c3468a93231/page.htm,2026-06-24,学校官网历年分数入口；已导入2023-2025广东历史类分专业录取人数、最高分、平均分、最低分、最低排位
 广东,major_admission,深圳大学广东录取数据,https://zs.szu.edu.cn/info/1153/2985.htm,2026-06-24,学校官网广东页；已导入2024-2025广东历史类分专业录取人数、最高分、平均分、最低分、最低排位；2023同页仅学校投档层面
 广东,major_admission,南方医科大学往年分数,https://portal.smu.edu.cn/bkzs/bkzn/wnfs.htm,2026-06-24,学校官网openapp查询；已导入2023-2025广东历史类分专业最高分、平均分、最低分、控制线；min_rank由同年分数段表按最低分补齐
+广东,major_admission,广州大学历年分数,https://zsjy.gzhu.edu.cn/bkzn/lnfs2.htm,2026-06-24,学校官网openapp查询；已导入2023-2025广东历史类分专业最低分和最低位次；含普通类、地方专项、教师专项、国际班、中外合作办学
+广东,major_admission,华南师范大学广东省录取情况一览表,https://zsb.scnu.edu.cn/zhiyuancankao/,2026-06-24,学校官网PDF；已导入2023-2025广东历史类分专业录取数、最高分、平均分、最低分、最低位次；含普通类、地方专项
+广东,major_admission,广东金融学院信息公开网录取结果,https://xxgk.gduf.edu.cn/xxgklm/zsksxx/lqjg.htm,2026-06-24,学校官网图片表；已导入2023-2024广东历史类分专业录取人数、最高分、平均分、最低分、最低排位；2025专业分数页未在官方栏目定位
+广东,major_admission,广东财经大学本科招生办公室历年分数,https://zsb.gdufe.edu.cn/11400/list.htm,2026-06-24,学校官网；已导入2023-2025广东历史类分专业录取数、最高分、平均分、最低分、最低排位；2024-2025为PDF文本表，2023为图片OCR
+广东,major_admission,广东工业大学招生办公室录取数据,https://zsb.gdut.edu.cn/xxcx/lqsj.htm,2026-06-24,学校官网图片表；已导入2023-2025广东历史类分专业录取数、最高分、平均分、最低分、最低排位；含普通类、国际班、地方专项；艺术类未并入普通历史类推荐数据
+广东,major_admission,广东外语外贸大学本科招生网历年分数,https://zsxc.gdufs.edu.cn/zsxx/zsw/lnfs.html,2026-06-24,学校官网招生系统；已导入2023-2025广东历史类分专业最高分、最低分、最低排位；含普通类、合作办学、地方专项计划
+广东,major_admission,中山大学本科招生网历年分数,https://admission.sysu.edu.cn/zsw/lnfs.html,2026-06-24,学校官网招生系统；已导入2023-2025广东历史类分专业录取数、最高分、平均分、最低分、最低排位；含普通录取、高校专项
+广东,major_admission,广东医科大学2023-2025年广东省普通类专业录取分数线,https://zs.gdmu.edu.cn/info/1036/2717.htm,2026-06-24,学校官网图片表；已导入2023-2025广东历史类分专业平均分、最高分、最低分、最低排位；普通类
+广东,major_admission,广州医科大学历年分数（广东）,https://zs.gzhmu.edu.cn/wnlqfs/lnfs_gd_/a2025n.htm,2026-06-24,学校官网图片表；已导入2023-2025广东历史类分专业最低分、最低排位；含普通类、地方专项
+广东,major_admission,汕头大学历年分数,https://zs.stu.edu.cn/bkzn/lnfs.htm,2026-06-24,学校官网JSON；已导入2023-2025广东历史类分专业录取人数、最高分、平均分、最低分；含普通类、地方专项；min_rank由同年分数段表按最低分补齐

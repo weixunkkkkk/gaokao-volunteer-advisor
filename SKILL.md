@@ -1,6 +1,6 @@
 ---
 name: gaokao-volunteer-advisor
-description: Build and run a Gaokao college-application advisor for Chinese candidates. Use when the user wants 2026 高考志愿参考, school recommendations from province/track/score/rank, 冲稳保院校分层, past-three-year admission cutoff comparison, one-score-one-rank handling, major recommendations from interests, or employment-outlook guidance for majors.
+description: Build and run a Gaokao college-application advisor for Chinese candidates. Use when the user wants 2026 高考志愿参考, school recommendations from province/track/score/rank, 冲稳保垫志愿方案, admission-risk assessment, past-three-year admission cutoff comparison, one-score-one-rank handling, major recommendations from interests, professional admission-score analysis, or employment-outlook guidance for majors.
 ---
 
 # Gaokao Volunteer Advisor
@@ -11,10 +11,16 @@ Treat every recommendation as a reference, not a guarantee. Prefer rank/位次 o
 
 For 2026 candidates, use 2023, 2024, and 2025 admission/cutoff data as the normal three-year historical baseline. If the user asks during 2026 filing, also verify current-year provincial rules, batch settings, elective-subject constraints, and招生计划 before giving concrete advice.
 
+Use two service depths:
+
+- **Quick reference**: province, track, score/rank, and interests are enough. State missing assumptions clearly.
+- **Formal志愿方案**: collect region, school type, tuition, public/private/中外合作 tolerance, whether服从调剂, body/单科/外语 restrictions, and career direction before finalizing a table.
+
 ## Workflow
 
 1. Collect minimum inputs:
    - Province, such as `广东`
+   - Gaokao year, especially whether the user needs 2026 planning
    - Track or subject type, such as `物理类`, `历史类`, `理科`, `文科`, or a province-specific category
    - Score and rank. If rank is missing, estimate it from a one-score-one-rank table only when the local data contains that table.
    - Interests or fields, such as `人工智能`, `医学`, `新能源`, `财经`, `传媒`
@@ -62,11 +68,13 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
    - `稳`: candidate rank is close to or modestly better than recent historical cutoff.
    - `保`: candidate rank is clearly better than recent historical cutoff.
    - `险`: candidate rank is far behind historical cutoff; include only as a risk note or when the user explicitly wants aggressive options.
+   - `垫`: for a formal志愿表, select from the safest `保` rows with a large rank buffer; do not confuse it with `险`.
    - If `major_name` is present, treat the row as major-level evidence. If only `major_group` is present, treat it as a school/major-group floor and say that group-internal热门专业 may be higher.
 8. Recommend majors after school fit:
    - Match interests to major families.
    - Explain就业前景 in practical terms: common roles, industry demand, volatility, learning burden, and credential barriers.
    - Avoid promising salary, employment certainty, or guaranteed admissions.
+9. For a formal plan, include official-confirmation reminders: provincial application system, school admission site, current招生计划,院校/专业代码,选科要求,体检限制,单科要求,学费,校区,学制, and专业录取规则.
 
 ## Resources
 
@@ -80,6 +88,17 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/import_jnu_major_scores.py` to import 暨南大学 official Guangdong major-level scores into Guangdong pilot data.
 - Use `scripts/import_szu_major_scores.py` to import 深圳大学 official Guangdong major-level scores into Guangdong pilot data.
 - Use `scripts/import_smu_major_scores.py` to import 南方医科大学 official Guangdong major-level scores into Guangdong pilot data.
+- Use `scripts/import_gzhu_major_scores.py` to import 广州大学 official Guangdong major-level scores into Guangdong pilot data.
+- Use `scripts/import_scnu_major_scores.py` to import 华南师范大学 official Guangdong major-level scores from official PDFs into Guangdong pilot data.
+- Use `scripts/import_gduf_major_scores.py` to import 广东金融学院 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_gdufe_major_scores.py` to import 广东财经大学 official Guangdong major-level scores from school-site PDFs and image tables into Guangdong pilot data.
+- Use `scripts/import_gdut_major_scores.py` to import 广东工业大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_gdufs_major_scores.py` to import 广东外语外贸大学 official Guangdong major-level scores from the school admission-system JSON API into Guangdong pilot data.
+- Use `scripts/import_sysu_major_scores.py` to import 中山大学 official Guangdong major-level scores from the school admission-system JSON API into Guangdong pilot data.
+- Use `scripts/import_gdmu_major_scores.py` to import 广东医科大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_gzhmu_major_scores.py` to import 广州医科大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_stu_major_scores.py` to import 汕头大学 official Guangdong major-level scores from school-site JSON into Guangdong pilot data.
+- Use `scripts/vision_ocr_image_zh.swift` for macOS Vision OCR on Chinese official image tables when a dedicated importer calls it.
 - Use `scripts/ocr_grid_rank_pdf.py` for clear image-only official score-band PDFs that have one grid table with `分数 / 人数 / 累计人数`.
 - Use `scripts/ocr_scanned_rank_pdf_macos.py` for scanned official one-score-one-rank PDFs on macOS when normal PDF text extraction fails.
 - Use `scripts/ocr_rank_image_macos.py` for image-only official one-score-one-rank tables, and keep it in dry-run mode until OCR warnings have been checked.
@@ -97,7 +116,7 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - `assets/pilot-data/shandong-ordinary` contains the current Shandong ordinary-category pilot data directory.
 - `assets/pilot-data/beijing-ordinary` contains the current Beijing ordinary-category pilot data directory.
 - `assets/pilot-data/shanghai-ordinary` contains the current Shanghai ordinary-category pilot data directory.
-- `assets/source-discovery/guangdong` tracks Guangdong school-site major-score source status, including imported and not-yet-imported official sources.
+- `assets/source-discovery/guangdong` tracks Guangdong school-site major-score source status, including the 2026 Guangdong public-undergraduate target list, imported sources, and not-yet-imported official sources.
 - `assets/source-discovery/jiangsu` contains discovered Jiangsu official sources; it is not yet a usable pilot data directory.
 - `assets/source-discovery/hebei` contains discovered Hebei official sources plus an OCR draft; it is not yet a usable pilot data directory.
 - `assets/data` contains tiny demo CSVs marked `DEMO_NOT_REAL`; replace or override them with verified provincial and school data before real counseling.
@@ -108,6 +127,7 @@ For user-facing answers, include:
 
 1. Input summary.
 2. Data coverage: province, track, years, row count, and whether data is demo or verified.
-3. School recommendations grouped by `冲/稳/保`, with historical rank and score references.
+3. School recommendations grouped by `冲/稳/保`; add `垫` for formal full志愿方案 when enough safe options exist.
 4. Major suggestions tied to the user's interests.
-5. Missing information and next checks, especially 2026招生计划、选科限制、学费、城市、家庭预算、是否接受中外合作/民办/独立学院.
+5. A recommendation table when the user wants a方案: 志愿顺序、院校、专业/专业组、近三年最低分/位次、考生位次对比、层级、概率表述、关键说明.
+6. Missing information and next checks, especially 2026招生计划、选科限制、学费、城市、家庭预算、是否接受中外合作/民办/独立学院、是否服从调剂、体检/单科/外语限制.

@@ -62,7 +62,7 @@ python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/
 
 This helper only fills blank `min_rank` values; it does not overwrite official rank values.
 
-For official school-site major-level score queries, keep the source separate from provincial投档线 and preserve the official school source in every row. Guangdong currently has dedicated importers for 华南理工大学、暨南大学、深圳大学、南方医科大学:
+For official school-site major-level score queries, keep the source separate from provincial投档线 and preserve the official school source in every row. Guangdong currently has dedicated importers for 中山大学、华南理工大学、暨南大学、深圳大学、南方医科大学、广州大学、华南师范大学、广东金融学院、广东财经大学、广东工业大学、广东外语外贸大学、广东医科大学、广州医科大学、汕头大学:
 
 ```bash
 python3 scripts/import_scut_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --source-track '理工/物理类' --replace-existing
@@ -73,11 +73,32 @@ python3 scripts/import_szu_major_scores.py --data-dir assets/pilot-data/guangdon
 python3 scripts/import_szu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
 python3 scripts/import_smu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
 python3 scripts/import_smu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gzhu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gzhu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_scnu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_scnu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gduf_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gduf_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gdufe_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gdufe_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gdut_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gdut_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gdufs_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gdufs_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_sysu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_sysu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gdmu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gdmu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_gzhmu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_gzhmu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_stu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_stu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
 python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/guangdong-physics --province 广东 --track 物理类
 python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/guangdong-history --province 广东 --track 历史类
 ```
 
 School-site rows with `major_name` are more precise than province-level院校专业组 rows for热门专业判断, but they cover only that school and must not be described as province-wide major coverage.
+The Guangdong public-undergraduate target scope from `https://www.dxsbb.com/news/51305.html` is stored in `assets/source-discovery/guangdong/target_public_undergraduate_schools_2026.csv`; use it as a coverage checklist only. Admission-score rows still require official school or provincial sources.
 
 For official PDF tables, use:
 
@@ -145,7 +166,7 @@ These are verified entry points for the first pilot province. Keep exact row-lev
 
 Pilot historical source status is tracked in each pilot directory's `collection_manifest.csv`. Guangdong school-site major-source progress is tracked in `assets/source-discovery/guangdong/major_source_inventory.csv`.
 
-The current pilot data directories are `assets/pilot-data/guangdong-physics` and `assets/pilot-data/guangdong-history`. They contain real 2023, 2024, and 2025 Guangdong本科普通类投档数据, plus 2023, 2024, and 2025 ordinary score-segment rank data for the matching track imported from official PDFs/ZIP attachments. They also include official school-site major-level admission rows for 华南理工大学、暨南大学、深圳大学、南方医科大学: 729 physics rows and 245 history rows. 深圳大学专业级 coverage is 2024-2025 only because the official Guangdong page exposes 2023 only at投档 summary level. The 2023 rank tables came from the official image-only PDF and were imported with macOS Vision OCR, so keep OCR warnings and spot checks with the import log when using them for real counseling.
+The current pilot data directories are `assets/pilot-data/guangdong-physics` and `assets/pilot-data/guangdong-history`. They contain real 2023, 2024, and 2025 Guangdong本科普通类投档数据, plus 2023, 2024, and 2025 ordinary score-segment rank data for the matching track imported from official PDFs/ZIP attachments. They also include official school-site major-level admission rows for 中山大学、华南理工大学、暨南大学、深圳大学、南方医科大学、广州大学、华南师范大学、广东金融学院、广东财经大学、广东工业大学、广东外语外贸大学、广东医科大学、广州医科大学、汕头大学: 2749 physics rows and 1183 history rows. 深圳大学专业级 coverage is 2024-2025 only because the official Guangdong page exposes 2023 only at投档 summary level. 广东金融学院专业级 coverage is 2023-2024 only because the 2025 official major-score page has not been located in the school information-disclosure admission-results column. 华南师范大学 currently imports ordinary and地方专项 PDF rows; 中外合作PDF is registered for later extension. 广东财经大学2024-2025专业级数据来自官网PDF文本表，2023来自官网图片表并经macOS Vision OCR导入。广东工业大学2023-2025专业级数据来自官网长图片表，已导入普通类、国际班、地方专项，艺术类未混入普通物理/历史推荐数据。广东医科大学2023-2025专业级数据来自官网图片表，已导入普通类。广州医科大学2023-2025专业级数据来自官网图片表，已导入普通类、地方专项。汕头大学2023-2025专业级数据来自官网JSON，已导入普通类、地方专项、卫生专项，min_rank由同年分数段表按最低分补齐。中山大学、广东外语外贸大学2023-2025专业级数据来自官网招生系统JSON接口。The 2023 rank tables and 广东金融学院/广东财经大学/广东工业大学/广东医科大学/广州医科大学 image tables came from official image-only material and were imported with macOS Vision OCR, so keep OCR warnings and spot checks with the import log when using them for real counseling.
 
 ## Zhejiang Pilot Sources
 
