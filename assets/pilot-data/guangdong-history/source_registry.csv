@@ -53,5 +53,6 @@ province,source_type,source_name,url,verified_date,notes
 广东,major_admission,广东警官学院招生网 + 聚合站dxsbb补充,https://zsb.gdppla.edu.cn/,2026-06-24,Workbuddy补充普通本科批法学、社会工作、行政管理专业行；2023含聚合站补充，待官方复核；公安提前批需单独采集。
 广东,major_admission,星海音乐学院招生网 + Workbuddy补充,https://zs.xhcom.edu.cn/index/lnfsx.htm,2026-06-24,Workbuddy补充普通类艺术管理专业行，待官方复核；音乐类校考专业需单独采集。
 广东,major_admission,韶关学院招生信息网,https://www.sgu.edu.cn/zsxxw/info/1022/12638.htm,2026-06-24,学校官网附件《2025年录取统计（广东省内）.xlsx》；已导入2025广东物理类/历史类本科普通批专业最低分和最低排位；不含提前批、艺体类、专科；2023-2024仍待官方附件复核。
-广东,major_admission,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/{school_id}/{year}/44.json,2026-06-24,公开JSON API补充17所广东公办本科缺口；聚合站来源，待官方复核；仅导入本科层次，剔除专科；含普通本科批、职业本科、公安提前批等，使用时必须按batch/plan_type区分。
+广东,major_admission,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/{school_id}/{year}/44.json,2026-06-24,公开JSON API补充广东公办本科缺口；肇庆医学院本科专业行已由学校官网替换；当前仍有16所学校为聚合/API或Workbuddy补充并待官方复核；仅导入本科层次，剔除专科；含普通本科批、职业本科、公安提前批等，使用时必须按batch/plan_type区分。
 广东,major_admission,深圳职业技术大学招生信息网,https://zhaosheng.szpu.edu.cn/zszn/lnlqfs.htm,2026-06-24,学校招生网历年录取分数HTML表；已导入2023-2025广东物理类本科专业最低分和最低排位、2025广东历史类本科专业最低分和最低排位；剔除美术类和专科。
+广东,major_admission,肇庆医学院招生信息网,https://zhaosheng.zqmc.edu.cn/lnfs.htm,2026-06-24,学校官网普通本科批录取情况图片表；已导入2024-2025广东物理类/历史类本科专业最低分和最低排位；只导入本科层次，卫生专项/专科未导入；2024为首批本科招生。

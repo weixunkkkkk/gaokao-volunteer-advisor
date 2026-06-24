@@ -117,6 +117,7 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/import_gpnu_major_scores.py` with the bundled Python runtime to import 广东技术师范大学 official Guangdong undergraduate major-level scores from the school admission-site API/HTML tables into Guangdong pilot data.
 - Use `scripts/import_sztu_major_scores.py` to import 深圳技术大学 official Guangdong undergraduate major-level scores from the school admission-site query interface into Guangdong pilot data.
 - Use `scripts/import_szpu_major_scores.py` to import 深圳职业技术大学 official Guangdong undergraduate major-level scores from school-site HTML tables.
+- Use `scripts/import_zqmc_major_scores.py` to import 肇庆医学院 official Guangdong undergraduate major-level scores from school-site image tables into Guangdong pilot data.
 - Use `scripts/import_gzucm_major_scores.py` with the bundled Python runtime to import 广州中医药大学 official Guangdong undergraduate major-level scores from school-site/official-WeChat image tables into Guangdong pilot data.
 - Use `scripts/import_gdpu_major_scores.py` with the bundled Python runtime to import 广东药科大学 official Guangdong undergraduate major-level scores from cached school-site PDF/Excel attachments into Guangdong pilot data.
 - Use `scripts/import_lingnan_major_scores.py` with the bundled Python runtime to import 岭南师范学院 official Guangdong undergraduate major-level scores from school-site HTML/image tables into Guangdong pilot data.
