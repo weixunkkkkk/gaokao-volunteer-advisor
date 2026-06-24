@@ -10,7 +10,7 @@ school_name,source_name,source_url,status,coverage,notes
 广州中医药大学,广州中医药大学本科招生网,https://xsc.gzucm.edu.cn/bkzs1/zsxx/lnlqqk.htm,imported,2023-2025 广东物理类/历史类本科专业级,学校官网历年录取情况页及其官方公众号图片表导入；2024按网格切格OCR，2023/2025经macOS Vision OCR；已导入普通类、卫生专项、地方专项本科专业行；不含体育/艺术/专科
 广东药科大学,广东药科大学招生办,https://zsb.gdpu.edu.cn/,imported,2023-2025 广东物理类/历史类本科专业级；物理类含卫生专项,学校招生办官方附件导入；2025省内PDF，2024/2023省内Excel，2025/2024/2023卫生专项附件；已导入普通类、国际班、卫生专项本科专业行；不含专科
 华南师范大学,华南师范大学本科招生网,https://zsb.scnu.edu.cn/zhiyuancankao/,imported,2023-2025 广东物理类/历史类专业级,官网PDF文本层已解析；已导入普通类和地方专项；中外合作PDF待单独补充
-韶关学院,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/298/{year}/44.json,imported_aggregator,2023-2025 广东物理类/历史类本科专业级,掌上高考公开API补充；学校官网附件仍需官方复核；聚合站来源，待官方复核。
+韶关学院,韶关学院招生信息网 + 掌上高考（聚合补充）,https://www.sgu.edu.cn/zsxxw/info/1022/12638.htm,imported_aggregator,2023-2025 广东物理类/历史类本科专业级；2025含官网来源,2025学校官网附件《2025年录取统计（广东省内）.xlsx》已导入；2023-2024仍用掌上高考公开API补充，聚合站来源，待官方复核。
 惠州学院,惠州学院招生信息网,https://zs.hzu.edu.cn/4728/list.htm,imported,2023-2025 广东物理类/历史类本科批专业级,官网历年招生栏目图片表导入；只导入广东本科批普通类/中外合作专业分数，不导入专科数据；含专业最低分和最低排位
 韩山师范学院,韩山师范学院招生办,https://zsb.hstc.edu.cn/list.jsp?urltype=tree.TreeTempUrl&wbtreeid=1023,imported,2023-2025 广东物理类/历史类本科批专业级；2023/2025教师专项,官网HTML表格导入2023-2025夏季高考本科批各专业录取分数；另导入2023/2025提前批教师专项。2024教师专项统计表未在官网最新消息全分页标题中定位；专科、3+证书、高水平运动队不导入。
 岭南师范学院,岭南师范学院招生信息网,https://zsb.lingnan.edu.cn/zszn/wnlq.htm,imported,2023-2025 广东物理类/历史类本科专业级,官网往年录取栏目导入2025 HTML表格、2024/2023官方图片表；已导入普通类、教师专项、协同培养、中外合作本科专业行，剔除艺体类和专科

@@ -62,7 +62,7 @@ python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/
 
 This helper only fills blank `min_rank` values; it does not overwrite official rank values.
 
-For official school-site major-level score queries, keep the source separate from provincial投档线 and preserve the official school source in every row. Guangdong currently has dedicated importers for 中山大学、华南理工大学、暨南大学、深圳大学、南方医科大学、广州大学、华南师范大学、广东金融学院、广东财经大学、广东工业大学、广东外语外贸大学、广东医科大学、广州医科大学、汕头大学、东莞理工学院、广东海洋大学、五邑大学、华南农业大学、惠州学院、广东第二师范学院、广州航海学院、广东石油化工学院、广东技术师范大学、深圳技术大学、广州中医药大学、广东药科大学、岭南师范学院、韩山师范学院、肇庆学院、嘉应学院、仲恺农业工程学院:
+For official school-site major-level score queries, keep the source separate from provincial投档线 and preserve the official school source in every row. Guangdong currently has dedicated importers for 中山大学、华南理工大学、暨南大学、深圳大学、南方医科大学、广州大学、华南师范大学、广东金融学院、广东财经大学、广东工业大学、广东外语外贸大学、广东医科大学、广州医科大学、韶关学院、汕头大学、东莞理工学院、广东海洋大学、五邑大学、华南农业大学、惠州学院、广东第二师范学院、广州航海学院、广东石油化工学院、广东技术师范大学、深圳技术大学、广州中医药大学、广东药科大学、岭南师范学院、韩山师范学院、肇庆学院、嘉应学院、仲恺农业工程学院:
 
 ```bash
 python3 scripts/import_scut_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --source-track '理工/物理类' --replace-existing
@@ -91,6 +91,8 @@ python3 scripts/import_gdmu_major_scores.py --data-dir assets/pilot-data/guangdo
 python3 scripts/import_gdmu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
 python3 scripts/import_gzhmu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
 python3 scripts/import_gzhmu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+/Users/xueweixun/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/import_sgu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+/Users/xueweixun/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/import_sgu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
 python3 scripts/import_stu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
 python3 scripts/import_stu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
 python3 scripts/import_dgut_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
