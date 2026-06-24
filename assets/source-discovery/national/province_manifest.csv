@@ -17,7 +17,7 @@ province,mode,tracks,exam_authority,url,rank_status,admission_status,current_dat
 河南,3+1+2,物理类|历史类,河南省教育考试院,https://www.haeea.cn/,needs_discovery,needs_discovery,,2025首届新高考省份之一；需按物理/历史分目录采集
 湖北,3+1+2,物理类|历史类,湖北省教育考试院,http://www.hbea.edu.cn/,needs_discovery,needs_discovery,,待采集2023-2025一分一段表和本科批投档表
 湖南,3+1+2,物理类|历史类,湖南省教育考试院,http://jyt.hunan.gov.cn/jyt/sjyt/hnsjyksy/,needs_discovery,needs_discovery,,待采集2023-2025一分一段表和本科批投档表
-广东,3+1+2,物理类|历史类,广东省教育考试院,https://eea.gd.gov.cn/,imported,imported,assets/pilot-data/guangdong-physics|assets/pilot-data/guangdong-history,省级投档和一分一段已导入；广东46所公办本科均已有专业级/部分专业级数据；其中28所为学校官网完整导入，18所为聚合/API或Workbuddy补充并标注待官方复核；特殊艺术/体育/公安院校和新升本科院校已纳入。
+广东,3+1+2,物理类|历史类,广东省教育考试院,https://eea.gd.gov.cn/,imported,imported,assets/pilot-data/guangdong-physics|assets/pilot-data/guangdong-history,省级投档和一分一段已导入；广东46所公办本科均已有专业级/部分专业级数据；其中29所为学校官网来源导入，17所为聚合/API或Workbuddy补充并标注待官方复核；特殊艺术/体育/公安院校和新升本科院校已纳入。
 广西,3+1+2,物理类|历史类,广西招生考试院,https://www.gxeea.cn/,needs_discovery,needs_discovery,,2024起新高考；需留意2023传统文理与2024-2025物理/历史不可直接混用
 海南,3+3,普通类,海南省考试局,https://ea.hainan.gov.cn/,needs_discovery,needs_discovery,,待采集2023-2025一分一段表和本科批投档表
 重庆,3+1+2,物理类|历史类,重庆教育考试院,https://www.cqksy.cn/,needs_discovery,needs_discovery,,待采集2023-2025一分一段表和本科批投档表

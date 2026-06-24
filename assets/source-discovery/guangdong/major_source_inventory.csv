@@ -39,7 +39,7 @@ school_name,source_name,source_url,status,coverage,notes
 深圳技术大学,深圳技术大学本科招生网,https://zs.sztu.edu.cn/bkzn/lnlq1.htm,imported,2023-2025 广东物理类/历史类本科专业级,学校官网历年录取查询接口导入；已导入普通物理/历史本科专业行；页面附件下载需验证码但查询接口公开返回结构化表；不含艺术类、音乐类、美术类和专科
 顺德职业技术大学,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/974/2025/44.json,imported_aggregator,2025 广东物理类本科专业级,掌上高考公开API补充；2025首批本科，聚合站来源，待官方复核。
 广东轻工职业技术大学,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/2048/{year}/44.json,imported_aggregator,2024-2025 广东本科专业级（物理类为主，含少量历史类）,掌上高考公开API补充；只导入本科层次，剔除专科；职业本科口径待官方复核。
-深圳职业技术大学,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/646/{year}/44.json,imported_aggregator,2023-2025 广东本科专业级（物理类为主，含少量历史类）,掌上高考公开API补充；只导入本科层次，剔除专科；2023本科层次口径待官方复核。
+深圳职业技术大学,深圳职业技术大学招生信息网,https://zhaosheng.szpu.edu.cn/zszn/lnlqfs.htm,imported,2023-2025 广东物理类本科专业级；2025 广东历史类本科专业级；官网来源,学校官网历年录取分数HTML表已导入；仅本科层次，剔除美术类和专科；2023-2024无历史类本科专业行。
 广州职业技术大学,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/2481/2025/44.json,imported_aggregator,2025 广东物理类本科专业级,掌上高考公开API补充；2025首批本科，聚合站来源，待官方复核。
 深圳信息职业技术大学,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/985/2025/44.json,imported_aggregator,2025 广东物理类本科专业级,掌上高考公开API补充；2025首批本科，聚合站来源，待官方复核。
 肇庆医学院,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/968/{year}/44.json,imported_aggregator,2024-2025 广东物理类/历史类本科专业级,掌上高考公开API补充；只导入本科层次，卫生专项/专科需分开；聚合站来源，待官方复核。
