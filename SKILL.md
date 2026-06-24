@@ -98,6 +98,22 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/import_gdmu_major_scores.py` to import 广东医科大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
 - Use `scripts/import_gzhmu_major_scores.py` to import 广州医科大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
 - Use `scripts/import_stu_major_scores.py` to import 汕头大学 official Guangdong major-level scores from school-site JSON into Guangdong pilot data.
+- Use `scripts/import_dgut_major_scores.py` to import 东莞理工学院 official Guangdong major-level scores from school-site HTML tables into Guangdong pilot data.
+- Use `scripts/import_gdou_major_scores.py` to import 广东海洋大学 official 2025 Guangdong major-level scores from the school-site HTML table into Guangdong pilot data.
+- Use `scripts/import_wyu_major_scores.py` to import 五邑大学 official Guangdong major-level scores from school-site GIF image tables into Guangdong pilot data.
+- Use `scripts/import_scau_major_scores.py` with the bundled Python runtime to import 华南农业大学 official Guangdong major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_hzu_major_scores.py` with the bundled Python runtime to import 惠州学院 official Guangdong undergraduate major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_gdei_major_scores.py` with the bundled Python runtime to import 广东第二师范学院 official Guangdong undergraduate major-level scores from school-site image tables into Guangdong pilot data.
+- Use `scripts/import_gzmtu_major_scores.py` with the bundled Python runtime to import 广州航海学院 official Guangdong undergraduate major-level scores from school-site HTML/PDF tables into Guangdong pilot data.
+- Use `scripts/import_gdupt_major_scores.py` to import 广东石油化工学院 official Guangdong undergraduate major-level scores from the school admission-site structured API into Guangdong pilot data.
+- Use `scripts/import_gpnu_major_scores.py` with the bundled Python runtime to import 广东技术师范大学 official Guangdong undergraduate major-level scores from the school admission-site API/HTML tables into Guangdong pilot data.
+- Use `scripts/import_sztu_major_scores.py` to import 深圳技术大学 official Guangdong undergraduate major-level scores from the school admission-site query interface into Guangdong pilot data.
+- Use `scripts/import_gzucm_major_scores.py` with the bundled Python runtime to import 广州中医药大学 official Guangdong undergraduate major-level scores from school-site/official-WeChat image tables into Guangdong pilot data.
+- Use `scripts/import_gdpu_major_scores.py` with the bundled Python runtime to import 广东药科大学 official Guangdong undergraduate major-level scores from cached school-site PDF/Excel attachments into Guangdong pilot data.
+- Use `scripts/import_lingnan_major_scores.py` with the bundled Python runtime to import 岭南师范学院 official Guangdong undergraduate major-level scores from school-site HTML/image tables into Guangdong pilot data.
+- Use `scripts/import_hstc_major_scores.py` with the bundled Python runtime to import 韩山师范学院 official Guangdong undergraduate major-level scores from cached school-site HTML tables into Guangdong pilot data.
+- Use `scripts/import_zqu_major_scores.py` with the bundled Python runtime to import 肇庆学院 official Guangdong undergraduate major-level scores from cached school-site mini-app image tables into Guangdong pilot data.
+- Use `scripts/import_jyu_major_scores.py` with the bundled Python runtime to import 嘉应学院 official Guangdong undergraduate major-level scores from cached school-site Excel attachments into Guangdong pilot data.
 - Use `scripts/vision_ocr_image_zh.swift` for macOS Vision OCR on Chinese official image tables when a dedicated importer calls it.
 - Use `scripts/ocr_grid_rank_pdf.py` for clear image-only official score-band PDFs that have one grid table with `分数 / 人数 / 累计人数`.
 - Use `scripts/ocr_scanned_rank_pdf_macos.py` for scanned official one-score-one-rank PDFs on macOS when normal PDF text extraction fails.
