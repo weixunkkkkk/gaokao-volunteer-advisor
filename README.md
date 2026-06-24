@@ -55,11 +55,15 @@
 
 ```bash
 python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 31500 --interests 电气,计算机,自动化
+python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 50000 --interests 计算机
+python3 scripts/run_advisor.py --province 湖南 --track 物理类 --score 570 --interests 计算机
 python3 scripts/run_advisor.py --province 上海 --score 555 --interests 人工智能,财经
 python3 scripts/run_advisor.py
 ```
 
-`run_advisor.py` 会自动匹配 `assets/pilot-data` 下已审计的数据包。若不传参数，会进入交互式输入。
+`run_advisor.py` 会优先匹配 `assets/pilot-data` 下已审计的数据包；如果目标省份/科类不在试点数据里，但本机有 `/Users/xueweixun/Downloads/各省份`，会直接使用本地 Excel 数据源。若不传参数，会进入交互式输入。
+
+如果本机存在 `/Users/xueweixun/Downloads/各省份`，脚本会自动把里面匹配省份、科类、2023-2025 年份的专业录取线读入；只给分数时，会用本地一分一段表估算位次，再按位次做冲稳保判断；结果里会增加“本省/省外重点”。可用 `--raw-data-root ""` 关闭，或用 `--raw-data-root /path/to/各省份` 指定其他目录。
 
 ## 数据审计
 

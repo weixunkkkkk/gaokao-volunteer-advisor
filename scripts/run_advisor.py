@@ -13,6 +13,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 PILOT_DATA_DIR = ROOT / "assets" / "pilot-data"
 NATIONAL_DATA_DIR = ROOT / "assets" / "national-data"
+DEFAULT_DATA_DIR = ROOT / "assets" / "data"
+DEFAULT_LOCAL_BUNDLE_ROOT = Path.home() / "Downloads" / "各省份"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from recommend import build_result, render_markdown  # noqa: E402
@@ -63,14 +65,31 @@ def discover_profiles() -> list[DataProfile]:
     return profiles
 
 
-def choose_profile(profiles: list[DataProfile], province: str | None, track: str | None) -> DataProfile:
+def choose_profile(
+    profiles: list[DataProfile],
+    province: str | None,
+    track: str | None,
+    raw_data_root: str | None,
+) -> DataProfile:
     if province:
         matches = [item for item in profiles if item.province == province and (not track or item.track == track)]
         if len(matches) == 1:
             return matches[0]
         if not matches:
+            raw_root = Path(raw_data_root or "").expanduser()
+            if raw_data_root and raw_root.exists():
+                if not track:
+                    raise SystemExit(f"当前将使用本地各省份数据源，请补充 {province} 的 --track，例如 物理类、历史类、理科、文科、综合。")
+                return DataProfile(
+                    name="local-excel-bundle",
+                    data_dir=DEFAULT_DATA_DIR,
+                    province=province,
+                    track=track,
+                    admission_rows=0,
+                    rank_rows=0,
+                )
             available = "；".join(f"{item.province}/{item.track}" for item in profiles)
-            raise SystemExit(f"当前没有 {province}{'/' + track if track else ''} 的正式可用数据。可用：{available}")
+            raise SystemExit(f"当前没有 {province}{'/' + track if track else ''} 的正式试点数据，也没有可用本地各省份目录。可用：{available}")
         options = "\n".join(f"- {item.province}/{item.track}：{item.name}" for item in matches)
         raise SystemExit(f"{province} 有多个科类，请补充 --track。\n{options}")
 
@@ -117,6 +136,10 @@ def build_recommend_args(args: argparse.Namespace, profile: DataProfile) -> argp
         rank=rank,
         interests=interests or "",
         data_dir=str(profile.data_dir),
+        raw_data_root=args.raw_data_root or "",
+        home_province=args.home_province or profile.province,
+        home_limit=args.home_limit,
+        away_limit=args.away_limit,
         per_level=args.per_level,
         major_limit=args.major_limit,
         include_risky=args.include_risky,
@@ -133,6 +156,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--score", type=int, help="Gaokao score")
     parser.add_argument("--rank", type=int, help="Candidate rank/位次")
     parser.add_argument("--interests", help="Comma-separated interests, e.g. 人工智能,财经")
+    parser.add_argument(
+        "--raw-data-root",
+        default=str(DEFAULT_LOCAL_BUNDLE_ROOT) if DEFAULT_LOCAL_BUNDLE_ROOT.exists() else "",
+        help="Optional local raw Excel bundle root, e.g. ~/Downloads/各省份",
+    )
+    parser.add_argument("--home-province", help="Candidate's home province for in-province/out-of-province picks")
+    parser.add_argument("--home-limit", type=int, default=1)
+    parser.add_argument("--away-limit", type=int, default=5)
     parser.add_argument("--per-level", type=int, default=5)
     parser.add_argument("--major-limit", type=int, default=5)
     parser.add_argument("--include-risky", action="store_true")
@@ -145,9 +176,11 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     profiles = discover_profiles()
-    if not profiles:
-        raise SystemExit("还没有正式可用数据包。请先导入并审计 assets/pilot-data 或 assets/national-data。")
-    profile = choose_profile(profiles, args.province, args.track)
+    raw_root = Path(args.raw_data_root or "").expanduser()
+    can_use_local_bundle = bool(args.province and args.track and args.raw_data_root and raw_root.exists())
+    if not profiles and not can_use_local_bundle:
+        raise SystemExit("还没有正式可用数据包。请先导入并审计 assets/pilot-data 或 assets/national-data，或提供本地各省份目录。")
+    profile = choose_profile(profiles, args.province, args.track, args.raw_data_root)
     recommend_args = build_recommend_args(args, profile)
     result = build_result(recommend_args)
     if args.format == "json":

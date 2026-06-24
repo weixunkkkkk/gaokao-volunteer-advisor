@@ -1,6 +1,6 @@
 ---
 name: gaokao-volunteer-advisor
-description: Build and run a Gaokao college-application advisor for Chinese candidates. Use when the user wants 2026 高考志愿参考, school recommendations from province/track/score/rank, 冲稳保垫志愿方案, admission-risk assessment, past-three-year admission cutoff comparison, one-score-one-rank handling, major recommendations from interests, professional admission-score analysis, or employment-outlook guidance for majors.
+description: Build and run a Gaokao college-application advisor for Chinese candidates. Use when the user wants 2026 高考志愿参考, school recommendations from province/track/score/rank, 本省/省外推荐, 冲稳保垫志愿方案, admission-risk assessment, past-three-year admission cutoff comparison, one-score-one-rank handling, local Excel bundles such as 各省份, major recommendations from interests, professional admission-score analysis, or employment-outlook guidance for majors.
 ---
 
 # Gaokao Volunteer Advisor
@@ -48,10 +48,12 @@ python3 scripts/audit_data.py --data-dir assets/data --target-years 2023,2024,20
 
 If the audit reports demo data, missing required years, or missing required columns, say that the current result is not ready for real志愿填报.
 
-5. For a simple user-facing run, use `scripts/run_advisor.py`. It discovers verified pilot data directories and asks for score, rank, and interests when missing:
+5. For a simple user-facing run, use `scripts/run_advisor.py`. It discovers verified pilot data directories first. If the province/track is not in pilot data but `/Users/xueweixun/Downloads/各省份` exists, it uses that local Excel bundle as the primary data source:
 
 ```bash
 python3 scripts/run_advisor.py --province 上海 --score 555 --interests 人工智能,财经
+python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 50000 --interests 计算机
+python3 scripts/run_advisor.py --province 湖南 --track 物理类 --score 570 --interests 计算机
 python3 scripts/run_advisor.py
 ```
 
@@ -60,6 +62,11 @@ python3 scripts/run_advisor.py
 ```bash
 python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 人工智能,新能源
 python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 公安 --include-special-plans
+
+If `/Users/xueweixun/Downloads/各省份` exists, `run_advisor.py` automatically treats it as a local Excel bundle. It reads matching 2023-2025 professional admission-score rows, reads one-score-one-rank Excel tables when score is provided without rank, reads `学校所在/学校性质/是否985/是否211`, and adds a `本省/省外重点` section. Use `--raw-data-root /path/to/各省份` to override or `--raw-data-root ""` to disable local Excel reading.
+
+python3 scripts/recommend.py --province 广东 --track 物理类 --rank 50000 --interests 计算机 --raw-data-root /Users/xueweixun/Downloads/各省份 --home-limit 1 --away-limit 5
+python3 scripts/recommend.py --province 湖南 --track 物理类 --score 570 --interests 计算机 --raw-data-root /Users/xueweixun/Downloads/各省份
 ```
 
 Use `--data-dir /path/to/data` when the real CSV files live outside the skill folder.
@@ -71,8 +78,10 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
    - `险`: candidate rank is far behind historical cutoff; include only as a risk note or when the user explicitly wants aggressive options.
    - `垫`: for a formal志愿表, select from the safest `保` rows with a large rank buffer; do not confuse it with `险`.
    - If `major_name` is present, treat the row as major-level evidence. If only `major_group` is present, treat it as a school/major-group floor and say that group-internal热门专业 may be higher.
+   - When only `score` is provided, convert it to rank from the latest matching local one-score-one-rank table before ranking recommendations. If no rank table exists, fall back to score comparison and say it is rougher.
 8. Recommend majors after school fit:
    - Match interests to major families.
+   - For `计算机`, also consider 软件工程、人工智能、数据科学与大数据技术、网络空间安全、物联网工程、信息安全、电子信息/自动化中的偏软件 or AI directions when the admission data supports them.
    - Explain就业前景 in practical terms: common roles, industry demand, volatility, learning burden, and credential barriers.
    - Avoid promising salary, employment certainty, or guaranteed admissions.
 9. For a formal plan, include official-confirmation reminders: provincial application system, school admission site, current招生计划,院校/专业代码,选科要求,体检限制,单科要求,学费,校区,学制, and专业录取规则.
@@ -162,6 +171,7 @@ For user-facing answers, include:
 1. Input summary.
 2. Data coverage: province, track, years, row count, and whether data is demo or verified.
 3. School recommendations grouped by `冲/稳/保`; add `垫` for formal full志愿方案 when enough safe options exist.
-4. Major suggestions tied to the user's interests.
-5. A recommendation table when the user wants a方案: 志愿顺序、院校、专业/专业组、近三年最低分/位次、考生位次对比、层级、概率表述、数据精度、关键说明.
-6. Missing information and next checks, especially 2026招生计划、选科限制、学费、城市、家庭预算、是否接受中外合作/民办/独立学院、是否服从调剂、体检/单科/外语限制.
+4. A `本省/省外重点` section when school-location metadata is available. For a quick Guangdong-style request, prefer one in-province highlight and several out-of-province highlights, while still preserving the full `冲/稳/保` tables below.
+5. Major suggestions tied to the user's interests, including adjacent majors when they are realistic substitutes.
+6. A recommendation table when the user wants a方案: 志愿顺序、院校、专业/专业组、近三年最低分/位次、考生位次对比、层级、概率表述、数据精度、关键说明.
+7. Missing information and next checks, especially 2026招生计划、选科限制、学费、城市、家庭预算、是否接受中外合作/民办/独立学院、是否服从调剂、体检/单科/外语限制.
