@@ -1,0 +1,6 @@
+year,province,track,score,min_rank,max_rank,same_score_count,source_url,source_name
+2025,广东,物理类,620,35000,35800,800,https://example.invalid,DEMO_NOT_REAL
+2025,广东,物理类,610,41500,42600,1100,https://example.invalid,DEMO_NOT_REAL
+2025,广东,物理类,600,42800,44000,1200,https://example.invalid,DEMO_NOT_REAL
+2025,广东,物理类,590,49200,50500,1300,https://example.invalid,DEMO_NOT_REAL
+2025,广东,物理类,580,56000,57500,1500,https://example.invalid,DEMO_NOT_REAL

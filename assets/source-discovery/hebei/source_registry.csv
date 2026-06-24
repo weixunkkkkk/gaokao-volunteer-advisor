@@ -1,0 +1,9 @@
+province,source_type,source_name,url,verified_date,notes
+河北,homepage,河北省教育考试院,https://www.hebeea.edu.cn/,2026-06-24,官方首页
+河北,official_archive,河北省教育考试院普通高考往年数据,https://www.hebeea.edu.cn/ptgk/wnsj/,2026-06-24,往年数据栏目含成绩统计表和本科批平行志愿投档情况统计
+河北,rank_table,2025年河北省普通高校招生各类考生成绩统计表,https://www.hebeea.edu.cn/c/2025-06-24/488903.html,2026-06-24,官方扫描 PDF；物理/历史同表；2025 OCR 草稿已生成但需复核
+河北,rank_table,2024年河北省普通高校招生各类考生成绩统计表,https://www.hebeea.edu.cn/c/2024-06-24/489444.html,2026-06-24,官方扫描 PDF；物理/历史同表；OCR 对个别高分段累计数有误读
+河北,rank_table,2023年河北省普通高校招生各类考生成绩统计表,https://www.hebeea.edu.cn/c/2023-06-24/488564.html,2026-06-24,官方扫描 PDF；物理/历史同表；OCR 草稿需复核
+河北,admission_cutoff,2025年河北省本科批平行志愿投档情况统计,https://www.hebeea.edu.cn/c/2025-07-23/489213.html,2026-06-24,官方 XLSX；物理/历史分附件；可解析但需位次表复核后导入正式数据
+河北,admission_cutoff,2024年河北省本科批平行志愿投档情况统计,https://www.hebeea.edu.cn/c/2024-07-22/489446.html,2026-06-24,官方 XLSX；物理/历史分附件；可解析
+河北,admission_cutoff,2023年河北省本科批平行志愿投档情况统计,https://www.hebeea.edu.cn/c/2023-07-25/489286.html,2026-06-24,官方 XLSX；物理/历史分附件；可解析

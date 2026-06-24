@@ -1,0 +1,12 @@
+province,source_type,source_name,url,verified_date,notes
+上海,homepage,上海市教育考试院,https://www.shmeea.edu.cn/,2026-06-24,官方首页
+上海,official_archive,上海市教育考试院高考高招栏目,https://www.shmeea.edu.cn/page/08000/index.html,2026-06-24,官方高考高招入口
+上海,rank_table,上海市2025年普通高校招生本科阶段考生各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20250623/19547.html,2026-06-24,官方页面附件为图片型 PDF；使用 ocr_grid_rank_pdf 严格校验导入
+上海,rank_table,2024年考生高考各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20240623/18609.html,2026-06-24,官方页面附件为文字 PDF；可解析
+上海,rank_table,2023年考生高考各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20230623/17660.html,2026-06-24,官方页面附件为文字 PDF；可解析
+上海,admission_cutoff,上海市2025年普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20250719/186.pdf,2026-06-24,官方 PDF；本科普通批主表
+上海,admission_cutoff,上海市2025年普通高校招生本科普通批次平行志愿院校Q组及部分中外合作办学院校专业组投档分数线,https://www.shmeea.edu.cn/download/20250719/185.pdf,2026-06-24,官方 PDF；Q组及部分中外合作办学
+上海,admission_cutoff,2024年上海市普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20240719/198.pdf,2026-06-24,官方 PDF；本科普通批主表
+上海,admission_cutoff,2024年上海市普通高校招生本科普通批次平行志愿院校Q组投档分数线,https://www.shmeea.edu.cn/download/20240719/197.pdf,2026-06-24,官方 PDF；Q组
+上海,admission_cutoff,2023年上海市普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20230721/11115.pdf,2026-06-24,官方 PDF；本科普通批主表
+上海,admission_cutoff,2023年上海市普通高校招生本科普通批次平行志愿院校Q组投档分数线,https://www.shmeea.edu.cn/download/20230721/1114.pdf,2026-06-24,官方 PDF；Q组

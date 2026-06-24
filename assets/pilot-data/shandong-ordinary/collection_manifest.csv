@@ -1,0 +1,7 @@
+province,year,dataset,track,article_title,article_url,attachment_url,file_type,status,importer,notes
+山东,2025,rank_table,普通类,2025年夏季高考文化成绩一分一段表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6943,https://www.sdzk.cn/Floadup/file/20250625/6388646133710894671069456.xls,xls,imported,soffice_to_csv_then_normalize_data,取全体本段人数和累计人数列
+山东,2024,rank_table,普通类,2024年夏季高考文化成绩一分一段表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6577,https://www.sdzk.cn/Floadup/file/20240625/6385492724297110442689837.xls,xls,imported,soffice_to_csv_then_normalize_data,取全体本段人数和累计人数列
+山东,2023,rank_table,普通类,2023年夏季高考文化成绩一分一段表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6212,https://www.sdzk.cn/Floadup/file/20230625/6382330466178390033845468.xls,xls,imported,soffice_to_csv_then_normalize_data,取全体本段人数和累计人数列
+山东,2025,admission_cutoff,普通类,山东省2025年普通类常规批第1次志愿投档情况表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6996,https://www.sdzk.cn/Floadup/file/20250719/6388855130412530367357143.xls,xls,imported,soffice_to_csv_then_normalize_data,投档表仅给最低位次 min_score 由同年一分一段表反推
+山东,2024,admission_cutoff,普通类,山东省2024年普通类常规批第1次志愿投档情况表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6656,https://www.sdzk.cn/Floadup/file/20240719/6385700532268895241675882.xls,xls,imported,soffice_to_csv_then_normalize_data,投档表仅给最低位次 min_score 由同年一分一段表反推
+山东,2023,admission_cutoff,普通类,山东省2023年普通类常规批第1次志愿投档情况表,https://www.sdzk.cn/NewsInfo.aspx?NewsID=6279,https://www.sdzk.cn/Floadup/file/20230719/6382538122655052185031609.xls,xls,imported,soffice_to_csv_then_normalize_data,投档表仅给最低位次 min_score 由同年一分一段表反推 极高位次若不在公开分段范围则保留空分数

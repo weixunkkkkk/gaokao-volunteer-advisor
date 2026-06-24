@@ -1,0 +1,9 @@
+province,source_type,source_name,url,verified_date,notes
+浙江,homepage,浙江省教育考试院,https://www.zjzs.net/,2026-06-24,浙江省教育考试院官网
+浙江,rank_table,浙江省2025年普通高校招生成绩分数段表（总分）,https://www.zjzs.net/art/2025/6/25/art_45_11373.html,2026-06-24,已导入普通类总分一分一段表
+浙江,rank_table,浙江省2024年普通高校招生成绩分数段表（总分）,https://www.zjzs.net/art/2024/6/26/art_45_9753.html,2026-06-24,已导入普通类总分一分一段表
+浙江,rank_table,浙江省2023年普通高校招生成绩分数段表(总分),https://www.zjzs.net/art/2023/6/26/art_45_6936.html,2026-06-24,已导入普通类总分一分一段表
+浙江,admission_cutoff,浙江省2025年普通高校招生普通类第一段平行投档分数线表,https://www.zjzs.net/art/2025/7/21/art_45_11467.html,2026-06-24,已导入普通类第一段专业投档线
+浙江,admission_cutoff,浙江省2024年普通高校招生普通类第一段平行投档分数线表,https://www.zjzs.net/art/2024/7/21/art_45_9899.html,2026-06-24,已导入普通类第一段专业投档线
+浙江,admission_cutoff,浙江省2023年普通高校招生普通类第一段平行投档分数线表,https://www.zjzs.net/art/2023/7/19/art_45_2052.html,2026-06-24,已导入普通类第一段专业投档线
+浙江,admission_major_detail,2023年至2025年浙江省普通高校招生投档及专业录取情况,https://www.zjzs.net/art/2026/6/22/art_45_12416.html,2026-06-24,已发现三年专业录取情况PDF 后续可用于更细校验

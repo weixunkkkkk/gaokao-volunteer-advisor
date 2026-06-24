@@ -1,0 +1,13 @@
+year,province,track,batch,school_name,school_code,major_group,major_name,plan_type,min_score,min_rank,admit_count,source_url,source_name,notes
+2023,广东,物理类,本科批,示例科技大学,DEMO001,201,计算机类,普通类,608,43000,120,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2024,广东,物理类,本科批,示例科技大学,DEMO001,201,计算机类,普通类,615,41000,118,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2025,广东,物理类,本科批,示例科技大学,DEMO001,201,计算机类,普通类,610,42000,116,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2023,广东,物理类,本科批,示例工业大学,DEMO002,205,电子信息类,普通类,585,52000,160,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2024,广东,物理类,本科批,示例工业大学,DEMO002,205,电子信息类,普通类,590,48000,152,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2025,广东,物理类,本科批,示例工业大学,DEMO002,205,电子信息类,普通类,588,50000,155,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2023,广东,物理类,本科批,示例城市学院,DEMO003,209,管理科学与工程类,普通类,565,67000,180,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2024,广东,物理类,本科批,示例城市学院,DEMO003,209,管理科学与工程类,普通类,570,63000,176,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2025,广东,物理类,本科批,示例城市学院,DEMO003,209,管理科学与工程类,普通类,568,65000,172,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2023,广东,物理类,本科批,示例医科大学,DEMO004,213,临床医学,普通类,630,37000,90,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2024,广东,物理类,本科批,示例医科大学,DEMO004,213,临床医学,普通类,635,35000,88,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试
+2025,广东,物理类,本科批,示例医科大学,DEMO004,213,临床医学,普通类,632,36000,86,https://example.invalid,DEMO_NOT_REAL,仅用于脚本测试

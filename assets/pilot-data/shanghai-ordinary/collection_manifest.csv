@@ -1,0 +1,10 @@
+province,year,dataset,track,article_title,article_url,attachment_url,file_type,status,importer,notes
+上海,2025,rank_table,普通类,上海市2025年普通高校招生本科阶段考生各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20250623/19547.html,https://www.shmeea.edu.cn/download/202506230/2/0.pdf,pdf,imported,ocr_grid_rank_pdf,图片型三列表 PDF；严格 OCR 警告模式通过；导入 222 行
+上海,2024,rank_table,普通类,2024年考生高考各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20240623/18609.html,https://www.shmeea.edu.cn/download/20240623/00.pdf,pdf,imported,pdf_table_to_csv,文字 PDF；导入 217 行
+上海,2023,rank_table,普通类,2023年考生高考各类别成绩分布表,https://www.shmeea.edu.cn/page/08000/20230623/17660.html,https://www.shmeea.edu.cn/download/20230623/2_0.pdf,pdf,imported,pdf_table_to_csv,文字 PDF；导入 336 行
+上海,2025,admission_cutoff,普通类,上海市2025年普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20250719/186.pdf,https://www.shmeea.edu.cn/download/20250719/186.pdf,pdf,imported,pdf_table_to_csv,主表导入 1379 行；min_rank 由同年成绩分布按投档线补齐
+上海,2025,admission_cutoff,普通类,上海市2025年普通高校招生本科普通批次平行志愿院校Q组及部分中外合作办学院校专业组投档分数线,https://www.shmeea.edu.cn/download/20250719/185.pdf,https://www.shmeea.edu.cn/download/20250719/185.pdf,pdf,imported,pdf_table_to_csv,Q组及部分中外合作导入 159 行；min_rank 由同年成绩分布按投档线补齐
+上海,2024,admission_cutoff,普通类,2024年上海市普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20240719/198.pdf,https://www.shmeea.edu.cn/download/20240719/198.pdf,pdf,imported,pdf_table_to_csv,主表导入 1329 行；min_rank 由同年成绩分布按投档线补齐
+上海,2024,admission_cutoff,普通类,2024年上海市普通高校招生本科普通批次平行志愿院校Q组投档分数线,https://www.shmeea.edu.cn/download/20240719/197.pdf,https://www.shmeea.edu.cn/download/20240719/197.pdf,pdf,imported,pdf_table_to_csv,Q组导入 24 行；min_rank 由同年成绩分布按投档线补齐
+上海,2023,admission_cutoff,普通类,2023年上海市普通高校招生本科普通批次平行志愿院校专业组投档分数线,https://www.shmeea.edu.cn/download/20230721/11115.pdf,https://www.shmeea.edu.cn/download/20230721/11115.pdf,pdf,imported,pdf_table_to_csv,主表导入 1344 行；min_rank 由同年成绩分布按投档线补齐
+上海,2023,admission_cutoff,普通类,2023年上海市普通高校招生本科普通批次平行志愿院校Q组投档分数线,https://www.shmeea.edu.cn/download/20230721/1114.pdf,https://www.shmeea.edu.cn/download/20230721/1114.pdf,pdf,imported,pdf_table_to_csv,Q组导入 18 行；min_rank 由同年成绩分布按投档线补齐

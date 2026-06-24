@@ -1,0 +1,12 @@
+province,source_type,source_name,url,verified_date,notes
+广东,homepage,广东省教育考试院,https://eea.gd.gov.cn/,2026-06-24,省级考试院官方入口
+广东,policy_2026,广东省2026年普通高考成绩发布通知,https://eea.gd.gov.cn/ptgk/content/post_4914634.html,2026-06-24,用于确认成绩发布时间和官方查询渠道
+广东,policy_2026,广东省2026年普通高校招生工作通知,https://eea.gd.gov.cn/ptgk/content/post_4896195.html,2026-06-24,用于确认广东2026招生政策和志愿填报咨询规范
+广东,subject_requirements,2027年起拟在粤招生本专科专业选考科目要求,https://www.eeagd.edu.cn/xkcx2027/,2026-06-24,2027起选科参考入口;2026填报仍需核对当年招生专业目录
+全国,official_platform,教育部阳光高考信息平台,https://gaokao.chsi.com.cn/,2026-06-24,招生章程和全国性官方入口;具体数据仍需按省和高校核验
+广东,rank_table_2025,广东省2025年普通高考成绩各分数段数据通知,https://eea.gd.gov.cn/ptgk/content/post_4734345.html,2026-06-24,官方公告含2025各科类分数段附件
+广东,admission_cutoff_2025,广东省2025年普通高考本科批次正式投档,https://eea.gd.gov.cn/ptgk/content/post_4746781.html,2026-06-24,官方公告含2025本科普通类物理投档PDF
+广东,rank_table_2024,广东省2024年普通高考成绩各分数段数据通知,https://eea.gd.gov.cn/ptgk/content/post_4445521.html,2026-06-24,官方公告含2024各科类分数段附件
+广东,admission_cutoff_2024,广东省2024年普通高考本科批次正式投档,https://eea.gd.gov.cn/ptgk/content/post_4458330.html,2026-06-24,官方公告含2024本科批次投档情况附件
+广东,rank_table_2023,广东省2023年普通高考成绩各分数段数据通知,https://eea.gd.gov.cn/ptgk/content/post_4207232.html,2026-06-24,官方公告含2023各科类分数段附件
+广东,admission_cutoff_2023,广东省2023年普通高考本科批次正式投档,https://eea.gd.gov.cn/ptgk/content/post_4221648.html,2026-06-24,官方公告含2023本科批次投档情况附件

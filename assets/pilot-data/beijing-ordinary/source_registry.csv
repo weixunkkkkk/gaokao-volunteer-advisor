@@ -1,0 +1,10 @@
+province,source_type,source_name,url,verified_date,notes
+北京,homepage,北京教育考试院,https://www.bjeea.cn/,2026-06-24,官方首页
+北京,official_archive,北京教育考试院高考高招栏目,https://www.bjeea.cn/html/gkgz/index.html,2026-06-24,官方高考高招入口；含录取统计查询和高招相关统计资料
+北京,statistics_bundle,2025年高招相关统计资料,https://www.bjeea.cn/html/gkgz/tzgg/2026/0617/88221.html,2026-06-24,含 2025 分数分布、2025 本科普通批投档线和 2024 统计资料入口
+北京,rank_table,北京市2025年高考考生分数分布,https://www.bjeea.cn/html/gkgz/tzgg/2025/0625/87165.html,2026-06-24,官方 PDF；文字表格可解析
+北京,rank_table,北京市2024年高考考生分数分布,http://www.bjeea.cn/html/gkgz/fujian/2024/0625/85432.html,2026-06-24,官方 HTML 表格
+北京,rank_table,2023年北京市高考考生分数分布,http://www.bjeea.cn/html/gkgz/fujian/2023/0625/83922.html,2026-06-24,官方 HTML 表格
+北京,admission_cutoff,2025年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2025/0720/87252.html,2026-06-24,官方 PDF；文字表格可解析
+北京,admission_cutoff,2024年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2024/0720/85632.html,2026-06-24,官方 HTML 表格
+北京,admission_cutoff,2023年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2023/0717/84120.html,2026-06-24,官方 HTML 表格

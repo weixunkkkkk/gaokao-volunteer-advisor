@@ -1,0 +1,7 @@
+province,year,dataset,track,article_title,article_url,attachment_url,file_type,status,importer,notes
+北京,2025,rank_table,普通类,北京市2025年高考考生分数分布,https://www.bjeea.cn/html/gkgz/tzgg/2025/0625/87165.html,https://www.bjeea.cn/uploads/soft/250625/172-2506250Q456.pdf,pdf,imported,pdf_table_to_csv,文字 PDF；导入 347 行
+北京,2024,rank_table,普通类,北京市2024年高考考生分数分布,http://www.bjeea.cn/html/gkgz/fujian/2024/0625/85432.html,http://www.bjeea.cn/html/gkgz/fujian/2024/0625/85432.html,html,imported,html_table_to_csv_then_normalize,官方 HTML 表格；导入 332 行
+北京,2023,rank_table,普通类,2023年北京市高考考生分数分布,http://www.bjeea.cn/html/gkgz/fujian/2023/0625/83922.html,http://www.bjeea.cn/html/gkgz/fujian/2023/0625/83922.html,html,imported,html_table_to_csv_then_normalize,官方 HTML 表格；导入 328 行
+北京,2025,admission_cutoff,普通类,2025年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2025/0720/87252.html,https://www.bjeea.cn/uploads/soft/250720/178-250H0201058.pdf,pdf,imported,pdf_table_to_csv,文字 PDF；导入 1397 行；min_rank 由同年分数分布按最低分补齐
+北京,2024,admission_cutoff,普通类,2024年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2024/0720/85632.html,https://www.bjeea.cn/html/gkgz/tzgg/2024/0720/85632.html,html,imported,html_table_to_csv_then_normalize,官方 HTML 表格；导入 1258 行；min_rank 由同年分数分布按最低分补齐
+北京,2023,admission_cutoff,普通类,2023年北京市高招本科普通批录取投档线,https://www.bjeea.cn/html/gkgz/tzgg/2023/0717/84120.html,https://www.bjeea.cn/html/gkgz/tzgg/2023/0717/84120.html,html,imported,html_table_to_csv_then_normalize,官方 HTML 表格；导入 1301 行；min_rank 由同年分数分布按最低分补齐

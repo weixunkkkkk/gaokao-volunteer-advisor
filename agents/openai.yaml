@@ -1,0 +1,4 @@
+interface:
+  display_name: "高考志愿顾问"
+  short_description: "根据分数位次生成高考志愿学校推荐和专业就业参考建议"
+  default_prompt: "Use $gaokao-volunteer-advisor to recommend colleges and majors from a Gaokao score, rank, province, and interests."
