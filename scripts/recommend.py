@@ -15,6 +15,25 @@ from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATA_DIR = ROOT / "assets" / "data"
+SPECIAL_PLAN_KEYWORDS = [
+    "提前",
+    "公安",
+    "地方专项",
+    "高校专项",
+    "国家专项",
+    "教师专项",
+    "卫生专项",
+    "免费医学生",
+    "定向",
+    "少数民族",
+    "民族班",
+    "预科",
+    "综合评价",
+    "强基",
+    "军校",
+    "艺术类",
+    "体育类",
+]
 
 
 @dataclass
@@ -170,6 +189,19 @@ def data_precision(major_group: str, major_name: str) -> str:
     return "学校级"
 
 
+def is_special_plan(record: AdmissionRecord) -> bool:
+    text = " ".join(
+        [
+            record.batch,
+            record.plan_type,
+            record.major_group,
+            record.major_name,
+            record.school_name if "专项" in record.school_name else "",
+        ]
+    )
+    return any(keyword in text for keyword in SPECIAL_PLAN_KEYWORDS)
+
+
 def classify_by_rank(candidate_rank: int, cutoff_rank: int) -> tuple[str, int, str]:
     band = dynamic_rank_band(candidate_rank)
     gap = cutoff_rank - candidate_rank
@@ -200,14 +232,17 @@ def build_recommendations(
     score: int | None,
     rank: int | None,
     include_risky: bool,
+    include_special_plans: bool,
 ) -> list[dict[str, object]]:
     filtered = [
         item
         for item in records
         if item.province == province and item.track == track and item.school_name
     ]
+    if not include_special_plans:
+        filtered = [item for item in filtered if not is_special_plan(item)]
     prefer_rank = rank is not None and any(item.min_rank is not None for item in filtered)
-    grouped: dict[tuple[str, str, str, str, str], list[AdmissionRecord]] = {}
+    grouped: dict[tuple[str, str, str, str, str, str], list[AdmissionRecord]] = {}
     for item in filtered:
         grouped.setdefault(option_key(item), []).append(item)
 
@@ -527,6 +562,10 @@ def render_markdown(result: dict[str, object]) -> str:
         f"- 录取线细度：专业级 {coverage.get('major_level_rows', 0)} 条；"
         f"院校专业组级 {coverage.get('major_group_only_rows', 0)} 条；学校级 {coverage.get('school_only_rows', 0)} 条"
     )
+    if input_summary.get("include_special_plans"):
+        lines.append("- 推荐范围：已包含提前批、专项、定向、艺术体育等特殊计划；请逐项核对资格限制。")
+    else:
+        lines.append("- 推荐范围：默认排除提前批、专项、定向、艺术体育等特殊计划；需要研究特殊批次时使用 `--include-special-plans`。")
     if coverage.get("missing_admission_years"):
         missing = ", ".join(str(year) for year in coverage["missing_admission_years"])
         lines.append(f"- 缺录取线年份：{missing}。当前结果只能做阶段性参考。")
@@ -548,9 +587,11 @@ def render_markdown(result: dict[str, object]) -> str:
         for level_items in result["recommendations_by_level"].values()
         for item in level_items
     ]
-    if any("掌上高考" in ",".join(item.get("source_names", [])) for item in all_recommendations):
+    shown_admission_matches = result.get("admission_major_matches") or []
+    shown_records = [*all_recommendations, *shown_admission_matches]
+    if any("掌上高考" in ",".join(item.get("source_names", [])) for item in shown_records):
         lines.append("- 注意：部分命中结果来自掌上高考聚合补充源，已标注来源，正式填报前必须用学校官网或招生计划复核。")
-    if any("提前" in str(item.get("batch") or "") or "公安" in str(item.get("plan_type") or "") for item in all_recommendations):
+    if any("提前" in str(item.get("batch") or "") or "公安" in str(item.get("plan_type") or "") for item in shown_records):
         lines.append("- 注意：当前结果含提前批/公安等特殊批次，政审、体检、体测、性别、地市和选科限制不能按普通本科批直接比较。")
     lines.append("")
 
@@ -648,6 +689,7 @@ def render_markdown(result: dict[str, object]) -> str:
 def build_result(args: argparse.Namespace) -> dict[str, object]:
     data_dir = Path(args.data_dir).expanduser().resolve()
     admissions = load_admissions(data_dir)
+    include_special_plans = getattr(args, "include_special_plans", False)
     rank = args.rank
     rank_note = None
     if rank is None:
@@ -660,6 +702,7 @@ def build_result(args: argparse.Namespace) -> dict[str, object]:
         args.score,
         rank,
         args.include_risky,
+        include_special_plans,
     )
     major_profiles = load_major_profiles(data_dir)
     recommendations = attach_major_profiles(recommendations, major_profiles)
@@ -672,6 +715,7 @@ def build_result(args: argparse.Namespace) -> dict[str, object]:
             "rank_note": rank_note,
             "interests": args.interests,
             "data_dir": str(data_dir),
+            "include_special_plans": include_special_plans,
         },
         "coverage": collect_coverage(
             admissions,
@@ -702,6 +746,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--per-level", type=int, default=8, help="Maximum recommendations per level")
     parser.add_argument("--major-limit", type=int, default=8, help="Maximum major suggestions")
     parser.add_argument("--include-risky", action="store_true", help="Include high-risk options")
+    parser.add_argument("--include-special-plans", action="store_true", help="Include提前批、专项、定向、艺术体育等特殊计划")
     parser.add_argument("--target-years", default="2023,2024,2025", help="Historical baseline years")
     parser.add_argument("--format", choices=["markdown", "json"], default="markdown")
     return parser.parse_args()

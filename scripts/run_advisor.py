@@ -120,6 +120,7 @@ def build_recommend_args(args: argparse.Namespace, profile: DataProfile) -> argp
         per_level=args.per_level,
         major_limit=args.major_limit,
         include_risky=args.include_risky,
+        include_special_plans=args.include_special_plans,
         target_years=args.target_years,
         format=args.format,
     )
@@ -135,6 +136,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--per-level", type=int, default=5)
     parser.add_argument("--major-limit", type=int, default=5)
     parser.add_argument("--include-risky", action="store_true")
+    parser.add_argument("--include-special-plans", action="store_true", help="Include提前批、专项、定向、艺术体育等特殊计划")
     parser.add_argument("--target-years", default="2023,2024,2025")
     parser.add_argument("--format", choices=["markdown", "json"], default="markdown")
     return parser.parse_args()

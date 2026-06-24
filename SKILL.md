@@ -55,10 +55,11 @@ python3 scripts/run_advisor.py --province 上海 --score 555 --interests 人工�
 python3 scripts/run_advisor.py
 ```
 
-6. Run `scripts/recommend.py` directly when you need deterministic ranking with explicit data paths:
+6. Run `scripts/recommend.py` directly when you need deterministic ranking with explicit data paths. By default it excludes提前批、专项、定向、艺术体育等特殊计划 so ordinary candidates do not mix incompatible rows into冲稳保; add `--include-special-plans` only when explicitly studying those batches:
 
 ```bash
 python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 人工智能,新能源
+python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 公安 --include-special-plans
 ```
 
 Use `--data-dir /path/to/data` when the real CSV files live outside the skill folder.
