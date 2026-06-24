@@ -62,6 +62,7 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
    - `稳`: candidate rank is close to or modestly better than recent historical cutoff.
    - `保`: candidate rank is clearly better than recent historical cutoff.
    - `险`: candidate rank is far behind historical cutoff; include only as a risk note or when the user explicitly wants aggressive options.
+   - If `major_name` is present, treat the row as major-level evidence. If only `major_group` is present, treat it as a school/major-group floor and say that group-internal热门专业 may be higher.
 8. Recommend majors after school fit:
    - Match interests to major families.
    - Explain就业前景 in practical terms: common roles, industry demand, volatility, learning burden, and credential barriers.
@@ -75,6 +76,10 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/normalize_data.py` to convert raw official CSV/XLSX tables into the standard CSV schema.
 - Use `scripts/pdf_table_to_csv.py` to convert official PDF tables into the standard CSV schema.
 - Use `scripts/html_table_to_csv.py` to convert official HTML tables into raw CSV before normalizing.
+- Use `scripts/import_scut_major_scores.py` to import 华南理工大学 official school-site major-level scores into Guangdong pilot data.
+- Use `scripts/import_jnu_major_scores.py` to import 暨南大学 official Guangdong major-level scores into Guangdong pilot data.
+- Use `scripts/import_szu_major_scores.py` to import 深圳大学 official Guangdong major-level scores into Guangdong pilot data.
+- Use `scripts/import_smu_major_scores.py` to import 南方医科大学 official Guangdong major-level scores into Guangdong pilot data.
 - Use `scripts/ocr_grid_rank_pdf.py` for clear image-only official score-band PDFs that have one grid table with `分数 / 人数 / 累计人数`.
 - Use `scripts/ocr_scanned_rank_pdf_macos.py` for scanned official one-score-one-rank PDFs on macOS when normal PDF text extraction fails.
 - Use `scripts/ocr_rank_image_macos.py` for image-only official one-score-one-rank tables, and keep it in dry-run mode until OCR warnings have been checked.
@@ -92,6 +97,7 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - `assets/pilot-data/shandong-ordinary` contains the current Shandong ordinary-category pilot data directory.
 - `assets/pilot-data/beijing-ordinary` contains the current Beijing ordinary-category pilot data directory.
 - `assets/pilot-data/shanghai-ordinary` contains the current Shanghai ordinary-category pilot data directory.
+- `assets/source-discovery/guangdong` tracks Guangdong school-site major-score source status, including imported and not-yet-imported official sources.
 - `assets/source-discovery/jiangsu` contains discovered Jiangsu official sources; it is not yet a usable pilot data directory.
 - `assets/source-discovery/hebei` contains discovered Hebei official sources plus an OCR draft; it is not yet a usable pilot data directory.
 - `assets/data` contains tiny demo CSVs marked `DEMO_NOT_REAL`; replace or override them with verified provincial and school data before real counseling.

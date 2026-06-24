@@ -10,3 +10,7 @@ province,source_type,source_name,url,verified_date,notes
 广东,admission_cutoff_2024,广东省2024年普通高考本科批次正式投档,https://eea.gd.gov.cn/ptgk/content/post_4458330.html,2026-06-24,官方公告含2024本科批次投档情况附件
 广东,rank_table_2023,广东省2023年普通高考成绩各分数段数据通知,https://eea.gd.gov.cn/ptgk/content/post_4207232.html,2026-06-24,官方公告含2023各科类分数段附件
 广东,admission_cutoff_2023,广东省2023年普通高考本科批次正式投档,https://eea.gd.gov.cn/ptgk/content/post_4221648.html,2026-06-24,官方公告含2023本科批次投档情况附件
+广东,major_admission,华南理工大学历年录取分数线,https://admission.scut.edu.cn/30821/list.htm,2026-06-24,学校官网 commonquery；含2023-2025广东普通类物理类分专业最高分、最低分、平均分
+广东,major_admission,暨南大学广东录取分数线,https://zsb.jnu.edu.cn/2016/1206/c3468a93231/page.htm,2026-06-24,学校官网历年分数入口；已导入2023-2025广东物理类分专业录取人数、最高分、平均分、最低分、最低排位
+广东,major_admission,深圳大学广东录取数据,https://zs.szu.edu.cn/info/1153/2985.htm,2026-06-24,学校官网广东页；已导入2024-2025广东物理类分专业录取人数、最高分、平均分、最低分、最低排位；2023同页仅学校投档层面
+广东,major_admission,南方医科大学往年分数,https://portal.smu.edu.cn/bkzs/bkzn/wnfs.htm,2026-06-24,学校官网openapp查询；已导入2023-2025广东物理类分专业最高分、平均分、最低分、控制线；min_rank由同年分数段表按最低分补齐

@@ -254,6 +254,37 @@ def split_interests(raw: str) -> list[str]:
     return parts
 
 
+INTEREST_SYNONYMS = {
+    "ai": ["人工智能", "智能", "ai", "计算机", "软件", "数据", "自动化"],
+    "人工智能": ["人工智能", "智能", "ai", "计算机", "软件", "数据", "自动化"],
+    "计算机": ["计算机", "软件", "人工智能", "智能", "数据", "网络安全"],
+    "财经": ["财经", "金融", "经济", "会计", "财务", "财政", "投资"],
+    "医学": ["医学", "临床", "口腔", "药学", "护理", "生物医学"],
+    "新能源": ["新能源", "能源", "电气", "储能", "材料", "车辆"],
+    "传媒": ["传媒", "新闻", "传播", "广告", "网络与新媒体"],
+}
+
+
+def expanded_interest_terms(interests_raw: str) -> list[str]:
+    terms: list[str] = []
+    for interest in split_interests(interests_raw):
+        terms.append(interest)
+        terms.extend(INTEREST_SYNONYMS.get(interest, []))
+    seen = set()
+    output = []
+    for term in terms:
+        key = term.lower()
+        if key not in seen:
+            seen.add(key)
+            output.append(key)
+    return output
+
+
+def major_matches_interest(major_name: str, interests_raw: str) -> bool:
+    major = major_name.lower()
+    return bool(major and any(term and term in major for term in expanded_interest_terms(interests_raw)))
+
+
 def match_majors(data_dir: Path, interests_raw: str, limit: int) -> list[dict[str, str]]:
     interests = split_interests(interests_raw)
     if not interests:
@@ -333,6 +364,9 @@ def collect_coverage(
     admission_years = sorted({item.year for item in selected})
     rank_years, rank_rows = collect_rank_years(data_dir, province, track)
     target_set = set(target_years)
+    major_level_rows = sum(1 for item in selected if item.major_name)
+    major_group_only_rows = sum(1 for item in selected if item.major_group and not item.major_name)
+    school_only_rows = sum(1 for item in selected if not item.major_group and not item.major_name)
     return {
         "province": province,
         "track": track,
@@ -341,6 +375,9 @@ def collect_coverage(
         "rank_years": rank_years,
         "rows": len(selected),
         "rank_rows": rank_rows,
+        "major_level_rows": major_level_rows,
+        "major_group_only_rows": major_group_only_rows,
+        "school_only_rows": school_only_rows,
         "missing_admission_years": sorted(target_set - set(admission_years)) if target_set else [],
         "missing_rank_years": sorted(target_set - set(rank_years)) if target_set else [],
         "manifest_gaps": collect_manifest_gaps(data_dir, province, track, target_years),
@@ -359,6 +396,23 @@ def grouped_by_level(recommendations: list[dict[str, object]], per_level: int) -
         if len(grouped.setdefault(level, [])) < per_level:
             grouped[level].append(item)
     return grouped
+
+
+def filter_interest_admission_matches(
+    recommendations: list[dict[str, object]],
+    interests_raw: str,
+    limit: int,
+) -> list[dict[str, object]]:
+    if not interests_raw:
+        return []
+    matches = [
+        item
+        for item in recommendations
+        if str(item.get("major_name") or "") and major_matches_interest(str(item.get("major_name") or ""), interests_raw)
+    ]
+    level_order = {"冲": 0, "稳": 1, "保": 2, "险": 3}
+    matches.sort(key=lambda item: (level_order.get(str(item.get("level")), 9), abs(int(item.get("gap") or 0))))
+    return matches[:limit]
 
 
 def markdown_table(rows: list[list[str]], headers: list[str]) -> str:
@@ -398,6 +452,10 @@ def render_markdown(result: dict[str, object]) -> str:
     lines.append(
         f"- 一分一段数据：年份："
         f"{', '.join(str(year) for year in rank_years) if rank_years else '无'}，记录数：{coverage.get('rank_rows', 0)}"
+    )
+    lines.append(
+        f"- 录取线细度：专业级 {coverage.get('major_level_rows', 0)} 条；"
+        f"院校专业组级 {coverage.get('major_group_only_rows', 0)} 条；学校级 {coverage.get('school_only_rows', 0)} 条"
     )
     if coverage.get("missing_admission_years"):
         missing = ", ".join(str(year) for year in coverage["missing_admission_years"])
@@ -447,6 +505,32 @@ def render_markdown(result: dict[str, object]) -> str:
         lines.append("")
 
     major_matches = result["major_matches"]
+    admission_major_matches = result.get("admission_major_matches") or []
+    if admission_major_matches:
+        rows = []
+        for item in admission_major_matches:
+            type_parts = []
+            if item.get("major_group"):
+                type_parts.append(f"专业组 {item['major_group']}")
+            if item.get("plan_type"):
+                type_parts.append(str(item["plan_type"]))
+            rows.append(
+                [
+                    str(item.get("school_name") or "-"),
+                    str(item.get("major_name") or "-"),
+                    " / ".join(type_parts) or "-",
+                    str(item.get("level") or "-"),
+                    str(item.get("median_rank") or "-"),
+                    str(item.get("median_score") or "-"),
+                    str(item.get("note") or "-"),
+                    ", ".join(str(year) for year in item.get("years", [])),
+                    ", ".join(item.get("source_names", [])) or "-",
+                ]
+            )
+        lines.append("## 已导入专业录取线匹配")
+        lines.append(markdown_table(rows, ["院校", "专业", "类型/专业组", "档位", "历史中位位次", "历史中位分", "判断", "年份", "来源"]))
+        lines.append("")
+
     if major_matches:
         rows = []
         for item in major_matches:
@@ -508,6 +592,11 @@ def build_result(args: argparse.Namespace) -> dict[str, object]:
             parse_target_years(args.target_years),
         ),
         "recommendations_by_level": grouped_by_level(recommendations, args.per_level),
+        "admission_major_matches": filter_interest_admission_matches(
+            recommendations,
+            args.interests or "",
+            args.major_limit,
+        ),
         "major_matches": match_majors(data_dir, args.interests or "", args.major_limit),
     }
     return result

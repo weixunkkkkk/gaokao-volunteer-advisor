@@ -62,6 +62,23 @@ python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/
 
 This helper only fills blank `min_rank` values; it does not overwrite official rank values.
 
+For official school-site major-level score queries, keep the source separate from provincial投档线 and preserve the official school source in every row. Guangdong currently has dedicated importers for 华南理工大学、暨南大学、深圳大学、南方医科大学:
+
+```bash
+python3 scripts/import_scut_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --source-track '理工/物理类' --replace-existing
+python3 scripts/import_scut_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --source-track '文史/历史类' --replace-existing
+python3 scripts/import_jnu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_jnu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_szu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_szu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/import_smu_major_scores.py --data-dir assets/pilot-data/guangdong-physics --track 物理类 --replace-existing
+python3 scripts/import_smu_major_scores.py --data-dir assets/pilot-data/guangdong-history --track 历史类 --replace-existing
+python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/guangdong-physics --province 广东 --track 物理类
+python3 scripts/fill_admission_ranks_from_score.py --data-dir assets/pilot-data/guangdong-history --province 广东 --track 历史类
+```
+
+School-site rows with `major_name` are more precise than province-level院校专业组 rows for热门专业判断, but they cover only that school and must not be described as province-wide major coverage.
+
 For official PDF tables, use:
 
 ```bash
@@ -126,9 +143,9 @@ These are verified entry points for the first pilot province. Keep exact row-lev
 - 广东 2027 年起拟在粤招生本专科专业选考科目要求: `https://www.eeagd.edu.cn/xkcx2027/`
 - 教育部阳光高考信息平台: `https://gaokao.chsi.com.cn/`
 
-Pilot historical source status is tracked in `assets/data/collection_manifest.csv`.
+Pilot historical source status is tracked in each pilot directory's `collection_manifest.csv`. Guangdong school-site major-source progress is tracked in `assets/source-discovery/guangdong/major_source_inventory.csv`.
 
-The current pilot data directories are `assets/pilot-data/guangdong-physics` and `assets/pilot-data/guangdong-history`. They contain real 2023, 2024, and 2025 Guangdong本科普通类投档数据, plus 2023, 2024, and 2025 ordinary score-segment rank data for the matching track imported from official PDFs/ZIP attachments. The 2023 rank tables came from the official image-only PDF and were imported with macOS Vision OCR, so keep OCR warnings and spot checks with the import log when using them for real counseling.
+The current pilot data directories are `assets/pilot-data/guangdong-physics` and `assets/pilot-data/guangdong-history`. They contain real 2023, 2024, and 2025 Guangdong本科普通类投档数据, plus 2023, 2024, and 2025 ordinary score-segment rank data for the matching track imported from official PDFs/ZIP attachments. They also include official school-site major-level admission rows for 华南理工大学、暨南大学、深圳大学、南方医科大学: 729 physics rows and 245 history rows. 深圳大学专业级 coverage is 2024-2025 only because the official Guangdong page exposes 2023 only at投档 summary level. The 2023 rank tables came from the official image-only PDF and were imported with macOS Vision OCR, so keep OCR warnings and spot checks with the import log when using them for real counseling.
 
 ## Zhejiang Pilot Sources
 

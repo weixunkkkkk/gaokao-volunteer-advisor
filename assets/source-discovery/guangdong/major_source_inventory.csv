@@ -1,0 +1,9 @@
+school_name,source_name,source_url,status,coverage,notes
+华南理工大学,华南理工大学本科招生网,https://admission.scut.edu.cn/30821/list.htm,imported,2023-2025 广东物理类/历史类专业级,commonquery接口返回分专业最高分/最低分/平均分；已入广东pilot
+暨南大学,暨南大学招生办公室,https://zsb.jnu.edu.cn/2016/1206/c3468a93231/page.htm,imported,2023-2025 广东物理类/历史类专业级,历年录取分数入口下各年份广东页为HTML表格；已入广东pilot
+深圳大学,深圳大学本科招生网,https://zs.szu.edu.cn/info/1153/2985.htm,imported,2024-2025 广东物理类/历史类专业级,官网广东页发布2024-2025分专业表；2023同页只有投档层面汇总
+南方医科大学,南方医科大学本科招生网,https://portal.smu.edu.cn/bkzs/bkzn/wnfs.htm,imported,2023-2025 广东物理类/历史类专业级,openapp查询组件返回结构化JSON；官网不含专业最低位次，已按广东同年分数段表补齐
+广东工业大学,广东工业大学招生办,https://zsb.gdut.edu.cn/xxcx/lqsj/n2025/gd.htm,discovered_image_source,2023-2025入口已发现,广东页主体为图片；需走OCR和人工抽样审核后再入pilot
+华南师范大学,华南师范大学本科招生网,https://zsb.scnu.edu.cn/,discovered_needs_mapping,往年录取分数入口已发现,官网有往年录取情况和志愿参考入口；需继续定位2023-2025广东专业级表格或图片源
+广州大学,广州大学本科招生网,https://zsjy.gzhu.edu.cn/,discovered_needs_mapping,入口已发现,官网和公众号/小程序线索已发现；需继续定位专业级最低分官方表
+广东外语外贸大学,广东外语外贸大学本科招生网,https://zs.gdufs.edu.cn/,discovered_needs_mapping,入口已发现,第三方能检索到专业级表但未使用；需继续定位官网接口或官方发布页
