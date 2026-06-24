@@ -134,14 +134,23 @@ def dynamic_rank_band(rank: int) -> int:
     return max(1000, min(15000, int(rank * 0.08)))
 
 
-def option_key(record: AdmissionRecord) -> tuple[str, str, str, str, str]:
+def option_key(record: AdmissionRecord) -> tuple[str, str, str, str, str, str]:
     return (
         record.school_name,
         record.school_code,
+        record.batch,
         record.major_group,
         record.major_name,
         record.plan_type,
     )
+
+
+def data_precision(major_group: str, major_name: str) -> str:
+    if major_name:
+        return "专业级"
+    if major_group:
+        return "专业组级"
+    return "学校级"
 
 
 def classify_by_rank(candidate_rank: int, cutoff_rank: int) -> tuple[str, int, str]:
@@ -214,9 +223,10 @@ def build_recommendations(
                 "level": level,
                 "school_name": key[0],
                 "school_code": key[1],
-                "major_group": key[2],
-                "major_name": key[3],
-                "plan_type": key[4],
+                "batch": key[2],
+                "major_group": key[3],
+                "major_name": key[4],
+                "plan_type": key[5],
                 "median_rank": cutoff_rank,
                 "median_score": cutoff_score,
                 "gap": gap,
@@ -226,6 +236,7 @@ def build_recommendations(
                 "source_names": source_names,
                 "demo": demo,
                 "record_count": len(items),
+                "data_precision": data_precision(key[3], key[4]),
             }
         )
 
@@ -472,6 +483,16 @@ def render_markdown(result: dict[str, object]) -> str:
         lines.append(f"- 注意：当前命中 {coverage['demo_rows']} 条样例数据，不能用于真实填报。")
     if not coverage.get("rows"):
         lines.append("- 当前数据目录没有命中记录，请先导入该省份、科类、近三年录取数据。")
+
+    all_recommendations = [
+        item
+        for level_items in result["recommendations_by_level"].values()
+        for item in level_items
+    ]
+    if any("掌上高考" in ",".join(item.get("source_names", [])) for item in all_recommendations):
+        lines.append("- 注意：部分命中结果来自掌上高考聚合补充源，已标注来源，正式填报前必须用学校官网或招生计划复核。")
+    if any("提前" in str(item.get("batch") or "") or "公安" in str(item.get("plan_type") or "") for item in all_recommendations):
+        lines.append("- 注意：当前结果含提前批/公安等特殊批次，政审、体检、体测、性别、地市和选科限制不能按普通本科批直接比较。")
     lines.append("")
 
     grouped = result["recommendations_by_level"]
@@ -483,6 +504,8 @@ def render_markdown(result: dict[str, object]) -> str:
         for item in items:
             option = item["school_name"]
             detail_parts = []
+            if item.get("batch"):
+                detail_parts.append(str(item["batch"]))
             if item.get("major_group"):
                 detail_parts.append(f"专业组 {item['major_group']}")
             if item.get("major_name"):
@@ -496,12 +519,13 @@ def render_markdown(result: dict[str, object]) -> str:
                     str(item.get("median_rank") or "-"),
                     str(item.get("median_score") or "-"),
                     str(item.get("note") or "-"),
+                    str(item.get("data_precision") or "-"),
                     ", ".join(str(year) for year in item.get("years", [])),
                     ", ".join(item.get("source_names", [])) or "-",
                 ]
             )
         lines.append(f"## {level} 档")
-        lines.append(markdown_table(rows, ["院校", "专业组/专业", "历史中位位次", "历史中位分", "判断", "年份", "来源"]))
+        lines.append(markdown_table(rows, ["院校", "专业组/专业", "历史中位位次", "历史中位分", "判断", "数据精度", "年份", "来源"]))
         lines.append("")
 
     major_matches = result["major_matches"]
@@ -510,6 +534,8 @@ def render_markdown(result: dict[str, object]) -> str:
         rows = []
         for item in admission_major_matches:
             type_parts = []
+            if item.get("batch"):
+                type_parts.append(str(item["batch"]))
             if item.get("major_group"):
                 type_parts.append(f"专业组 {item['major_group']}")
             if item.get("plan_type"):
@@ -523,12 +549,13 @@ def render_markdown(result: dict[str, object]) -> str:
                     str(item.get("median_rank") or "-"),
                     str(item.get("median_score") or "-"),
                     str(item.get("note") or "-"),
+                    str(item.get("data_precision") or "-"),
                     ", ".join(str(year) for year in item.get("years", [])),
                     ", ".join(item.get("source_names", [])) or "-",
                 ]
             )
         lines.append("## 已导入专业录取线匹配")
-        lines.append(markdown_table(rows, ["院校", "专业", "类型/专业组", "档位", "历史中位位次", "历史中位分", "判断", "年份", "来源"]))
+        lines.append(markdown_table(rows, ["院校", "专业", "批次/类型/专业组", "档位", "历史中位位次", "历史中位分", "判断", "数据精度", "年份", "来源"]))
         lines.append("")
 
     if major_matches:

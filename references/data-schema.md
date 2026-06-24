@@ -22,9 +22,9 @@ Required columns:
 - `min_score`: lowest admitted or投档 score
 - `min_rank`: lowest admitted or投档 rank/位次. Smaller number means stronger rank.
 - `admit_count`: admitted count or plan count when available
-- `source_url`: original official or school source URL
+- `source_url`: original source URL. Prefer official or school sources; if a reputable aggregator is used as a fallback, keep the aggregator URL here.
 - `source_name`: source label
-- `notes`: caveats, such as 征集志愿, 首年招生, 专业组调整
+- `notes`: caveats, such as 征集志愿, 首年招生, 专业组调整, 聚合站来源/待官方复核
 
 ### rank_table.csv
 
@@ -94,13 +94,13 @@ Use the highest-confidence available source:
 1. Provincial education examination authority: one-score-one-rank tables, control lines, batch rules.
 2. Official university admission office: major-level admission cutoffs and招生章程.
 3. Ministry/official platforms and published admissions plans.
-4. Reputable aggregators only as discovery aids; verify against official sources before marking rows as real.
+4. Reputable aggregators can be used as fallback admission-score sources when official pages are unavailable, captcha-gated, removed, or incomplete. Mark every such row clearly in `source_name` or `notes` as `聚合站` / `待官方复核`.
 
 ## Normalization Rules
 
 - Preserve the original source URL and source name on every row.
 - Do not combine score-only and rank-based data silently. If `min_rank` is unavailable, leave it blank and make the output say score-only.
-- Mark demo or unverified rows with `source_name=DEMO_NOT_REAL` or `UNVERIFIED`.
+- Mark demo rows with `source_name=DEMO_NOT_REAL`. Mark aggregator fallback rows with a real aggregator `source_name` and add `notes=聚合站来源，待官方复核` rather than pretending they are official.
 - Split ordinary,中外合作,专项计划,艺术体育,民族班,预科班 into separate `plan_type` values.
 - For new Gaokao provinces, keep `major_group`; school-level recommendations without group constraints are often too coarse.
 - For 2026 advice, treat 2023-2025 as historical data and separately check 2026招生计划 and选科要求.

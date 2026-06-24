@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PILOT_DATA_DIR = ROOT / "assets" / "pilot-data"
+NATIONAL_DATA_DIR = ROOT / "assets" / "national-data"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from recommend import build_result, render_markdown  # noqa: E402
@@ -40,24 +41,25 @@ def read_csv(path: Path) -> list[dict[str, str]]:
 
 def discover_profiles() -> list[DataProfile]:
     profiles: list[DataProfile] = []
-    if not PILOT_DATA_DIR.exists():
-        return profiles
-    for data_dir in sorted(path for path in PILOT_DATA_DIR.iterdir() if path.is_dir()):
-        admissions = read_csv(data_dir / "admission_records.csv")
-        ranks = read_csv(data_dir / "rank_table.csv")
-        province = next((norm(row.get("province")) for row in admissions if norm(row.get("province"))), "")
-        track = next((norm(row.get("track")) for row in admissions if norm(row.get("track"))), "")
-        if province and track:
-            profiles.append(
-                DataProfile(
-                    name=data_dir.name,
-                    data_dir=data_dir,
-                    province=province,
-                    track=track,
-                    admission_rows=len(admissions),
-                    rank_rows=len(ranks),
+    for root_dir in [PILOT_DATA_DIR, NATIONAL_DATA_DIR]:
+        if not root_dir.exists():
+            continue
+        for data_dir in sorted(path for path in root_dir.iterdir() if path.is_dir()):
+            admissions = read_csv(data_dir / "admission_records.csv")
+            ranks = read_csv(data_dir / "rank_table.csv")
+            province = next((norm(row.get("province")) for row in admissions if norm(row.get("province"))), "")
+            track = next((norm(row.get("track")) for row in admissions if norm(row.get("track"))), "")
+            if province and track:
+                profiles.append(
+                    DataProfile(
+                        name=f"{root_dir.name}/{data_dir.name}",
+                        data_dir=data_dir,
+                        province=province,
+                        track=track,
+                        admission_rows=len(admissions),
+                        rank_rows=len(ranks),
+                    )
                 )
-            )
     return profiles
 
 
@@ -68,11 +70,11 @@ def choose_profile(profiles: list[DataProfile], province: str | None, track: str
             return matches[0]
         if not matches:
             available = "；".join(f"{item.province}/{item.track}" for item in profiles)
-            raise SystemExit(f"当前没有 {province}{'/' + track if track else ''} 的正式试点数据。可用：{available}")
+            raise SystemExit(f"当前没有 {province}{'/' + track if track else ''} 的正式可用数据。可用：{available}")
         options = "\n".join(f"- {item.province}/{item.track}：{item.name}" for item in matches)
         raise SystemExit(f"{province} 有多个科类，请补充 --track。\n{options}")
 
-    print("当前可用试点数据：")
+    print("当前可用数据：")
     for index, item in enumerate(profiles, 1):
         print(f"{index}. {item.province}/{item.track} ({item.name})")
     while True:
@@ -142,7 +144,7 @@ def main() -> None:
     args = parse_args()
     profiles = discover_profiles()
     if not profiles:
-        raise SystemExit("还没有正式试点数据包。请先导入并审计 assets/pilot-data。")
+        raise SystemExit("还没有正式可用数据包。请先导入并审计 assets/pilot-data 或 assets/national-data。")
     profile = choose_profile(profiles, args.province, args.track)
     recommend_args = build_recommend_args(args, profile)
     result = build_result(recommend_args)

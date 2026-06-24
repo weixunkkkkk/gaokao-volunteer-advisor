@@ -49,3 +49,7 @@ province,source_type,source_name,url,verified_date,notes
 广东,major_admission,嘉应学院招生信息网,https://zs.jyu.edu.cn/portal/detail_dsnc.action?channel.id=2295767126766008&domain.id=4230570967593800,2026-06-24,学校官网Excel附件；已导入2025广东物理类/历史类本科专业最低分和最低排位；含普通类、教师专项、卫生专项、中外合作；不含艺体类/专科
 广东,major_admission,嘉应学院招生信息网,https://zs.jyu.edu.cn/portal/detail_dsnc.action?channel.id=2295767126766008&domain.id=4159977452156400,2026-06-24,学校官网Excel附件；已导入2024广东物理类/历史类本科专业最低分和最低排位；含普通类、教师专项、卫生专项、协同培养、中外合作；不含艺体类/专科
 广东,major_admission,嘉应学院招生信息网,https://zs.jyu.edu.cn/portal/detail_dsnc.action?channel.id=2295767126766008&domain.id=7820627160110100,2026-06-24,学校官网Excel附件；已导入2023广东物理类/历史类本科专业最低分和最低排位；含普通类、教师专项、卫生专项、协同培养、中外合作；不含艺体类/专科
+广东,major_admission,仲恺农业工程学院本科招生网,https://zsb-portal.zhku.edu.cn/details/article?id=675793,2026-06-24,学校官网三年汇总Excel附件；已导入2023-2025广东物理类本科专业最低分和最低排位；物理类含国际班；剔除艺术综合分行和专科
+广东,major_admission,广东警官学院招生网 + 聚合站dxsbb补充,https://zsb.gdppla.edu.cn/,2026-06-24,Workbuddy补充普通本科批法学、社会工作、行政管理专业行；2023含聚合站补充，待官方复核；公安提前批需单独采集。
+广东,major_admission,星海音乐学院招生网 + Workbuddy补充,https://zs.xhcom.edu.cn/index/lnfsx.htm,2026-06-24,Workbuddy补充普通类艺术管理专业行，待官方复核；音乐类校考专业需单独采集。
+广东,major_admission,掌上高考（聚合补充）,https://static-data.gaokao.cn/www/2.0/schoolspecialscore/{school_id}/{year}/44.json,2026-06-24,公开JSON API补充18所广东公办本科缺口；聚合站来源，待官方复核；仅导入本科层次，剔除专科；含普通本科批、职业本科、公安提前批等，使用时必须按batch/plan_type区分。

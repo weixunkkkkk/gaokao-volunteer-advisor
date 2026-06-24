@@ -81,9 +81,14 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Read `references/data-schema.md` before creating, cleaning, or importing admission CSV data.
 - Read `references/data-collection.md` before collecting real 2023-2025 provincial data or current-year 2026 policy data.
 - Read `references/advising-rules.md` before changing recommendation thresholds or writing a detailed counseling answer.
+- Read `references/major-reference.md` when explaining major employment outlook, learning difficulty, green/red-card risk, or typical career paths.
+- Read `references/guangdong-schools-inventory.md`, `references/special-schools-inventory.md`, and `references/supplementary-schools-data.md` when checking Guangdong public-undergraduate coverage gaps. Current Guangdong target covers all 46 public undergraduate schools, including new undergraduate vocational universities and special art/sports/public-security schools. Official sources are preferred, and reputable aggregator fallback rows may be imported only when `source_name`/`source_url` identify the aggregator and `notes` says `聚合站来源，待官方复核`.
+- Read `references/national-coverage-plan.md`, `assets/source-discovery/national/province_manifest.csv`, `assets/source-discovery/national/gaokao_cn_province_id_map.csv`, and `assets/source-discovery/national/gaokao_cn_school_ids.csv` before planning national expansion beyond the current pilot provinces. These files are coverage roadmaps and import aids, not proof that every province is already usable.
 - Use `scripts/normalize_data.py` to convert raw official CSV/XLSX tables into the standard CSV schema.
 - Use `scripts/pdf_table_to_csv.py` to convert official PDF tables into the standard CSV schema.
 - Use `scripts/html_table_to_csv.py` to convert official HTML tables into raw CSV before normalizing.
+- Use `scripts/sync_major_reference.py` to sync `references/major-reference.md` into each data directory's `majors.csv`.
+- Use `scripts/export_gaokao_cn_school_ids.py` to refresh the local 掌上高考 school-ID list for nationwide API-based supplemental imports.
 - Use `scripts/import_scut_major_scores.py` to import 华南理工大学 official school-site major-level scores into Guangdong pilot data.
 - Use `scripts/import_jnu_major_scores.py` to import 暨南大学 official Guangdong major-level scores into Guangdong pilot data.
 - Use `scripts/import_szu_major_scores.py` to import 深圳大学 official Guangdong major-level scores into Guangdong pilot data.
@@ -114,6 +119,9 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - Use `scripts/import_hstc_major_scores.py` with the bundled Python runtime to import 韩山师范学院 official Guangdong undergraduate major-level scores from cached school-site HTML tables into Guangdong pilot data.
 - Use `scripts/import_zqu_major_scores.py` with the bundled Python runtime to import 肇庆学院 official Guangdong undergraduate major-level scores from cached school-site mini-app image tables into Guangdong pilot data.
 - Use `scripts/import_jyu_major_scores.py` with the bundled Python runtime to import 嘉应学院 official Guangdong undergraduate major-level scores from cached school-site Excel attachments into Guangdong pilot data.
+- Use `scripts/import_zhku_major_scores.py` with the bundled Python runtime to import 仲恺农业工程学院 official Guangdong undergraduate major-level scores from cached school-site Excel attachments into Guangdong pilot data.
+- Use `scripts/import_special_reference_scores.py` to import Workbuddy supplemental/aggregator-marked ordinary-category major rows for special-scope Guangdong schools; these rows must keep `待官方复核` notes.
+- Use `scripts/import_gaokao_cn_major_scores.py` to import 掌上高考 public-API supplemental undergraduate major rows. It defaults to Guangdong but supports `--province-id` and `--schools-csv` for national expansion; these rows must keep `source_name=掌上高考（聚合补充）`, `聚合站来源，待官方复核` notes, and batch/plan-type distinctions.
 - Use `scripts/vision_ocr_image_zh.swift` for macOS Vision OCR on Chinese official image tables when a dedicated importer calls it.
 - Use `scripts/ocr_grid_rank_pdf.py` for clear image-only official score-band PDFs that have one grid table with `分数 / 人数 / 累计人数`.
 - Use `scripts/ocr_scanned_rank_pdf_macos.py` for scanned official one-score-one-rank PDFs on macOS when normal PDF text extraction fails.
@@ -133,6 +141,9 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - `assets/pilot-data/beijing-ordinary` contains the current Beijing ordinary-category pilot data directory.
 - `assets/pilot-data/shanghai-ordinary` contains the current Shanghai ordinary-category pilot data directory.
 - `assets/source-discovery/guangdong` tracks Guangdong school-site major-score source status, including the 2026 Guangdong public-undergraduate target list, imported sources, and not-yet-imported official sources.
+- `assets/source-discovery/national/province_manifest.csv` tracks nationwide province-level collection status and current pilot/national data directories.
+- `assets/source-discovery/national/gaokao_cn_province_id_map.csv` maps province names to 掌上高考 score API province IDs.
+- `assets/source-discovery/national/gaokao_cn_school_ids.csv` is the exported 掌上高考 school-ID list used by `--schools-csv` national supplemental imports.
 - `assets/source-discovery/jiangsu` contains discovered Jiangsu official sources; it is not yet a usable pilot data directory.
 - `assets/source-discovery/hebei` contains discovered Hebei official sources plus an OCR draft; it is not yet a usable pilot data directory.
 - `assets/data` contains tiny demo CSVs marked `DEMO_NOT_REAL`; replace or override them with verified provincial and school data before real counseling.
@@ -145,5 +156,5 @@ For user-facing answers, include:
 2. Data coverage: province, track, years, row count, and whether data is demo or verified.
 3. School recommendations grouped by `冲/稳/保`; add `垫` for formal full志愿方案 when enough safe options exist.
 4. Major suggestions tied to the user's interests.
-5. A recommendation table when the user wants a方案: 志愿顺序、院校、专业/专业组、近三年最低分/位次、考生位次对比、层级、概率表述、关键说明.
+5. A recommendation table when the user wants a方案: 志愿顺序、院校、专业/专业组、近三年最低分/位次、考生位次对比、层级、概率表述、数据精度、关键说明.
 6. Missing information and next checks, especially 2026招生计划、选科限制、学费、城市、家庭预算、是否接受中外合作/民办/独立学院、是否服从调剂、体检/单科/外语限制.
