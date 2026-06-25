@@ -45,7 +45,7 @@
 仓库同时内置全国 Excel 原始数据包：
 
 - 路径：`assets/raw-data/各省份`
-- 规模：约 1.2GB，1011 个 Excel 文件
+- 规模：约 1.28GB，1045 个有效文件，其中 Excel 文件 1010 个（已过滤 `.DS_Store` 等系统文件）
 - 范围：全国省份/直辖市/自治区数据文件夹，包括北京、上海、广东、福建、湖南、江苏、浙江、山东、四川、河南、河北等 31 个省级目录
 - 内容：近年招生计划、专业录取分数、院校录取分数、一分一段表等 Excel 表格
 
@@ -80,6 +80,124 @@ cd gaokao-volunteer-advisor
 python3 -m pip install -r requirements.txt
 python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 31500 --interests 电气,计算机,自动化
 ```
+
+## 用 Codex 使用
+
+本项目已经整理成 Skill 结构，仓库根目录包含：
+
+- `SKILL.md`
+- `agents/openai.yaml`
+- `scripts/run_advisor.py`
+- `assets/pilot-data`
+- `assets/raw-data`
+
+在 Codex 中使用时，可以直接通过 GitHub 仓库链接导入：
+
+```text
+https://github.com/weixunkkkkk/gaokao-volunteer-advisor
+```
+
+导入后，可以这样提问：
+
+```text
+使用高考志愿顾问。
+我是广东物理类考生，2026 年高考，全省位次 31500 名。
+我想读非广东的院校，专业方向关注电气工程、计算机、自动化。
+请帮我按冲、稳、保、垫推荐学校和专业，并说明依据和风险。
+```
+
+也可以只给部分信息：
+
+```text
+使用高考志愿顾问。
+省份：广东
+科类：物理类
+位次：31500
+兴趣方向：电气、计算机、自动化
+地域偏好：优先省外
+```
+
+建议尽量提供以下信息，结果会更准确：
+
+- 省份
+- 科类/选科
+- 分数
+- 全省位次
+- 想去的城市或省份
+- 是否接受省内/省外
+- 感兴趣的专业方向
+- 是否接受民办、中外合作、专项计划、提前批等特殊类型
+
+## 用 WorkBuddy / FRAE 使用
+
+如果你使用的是 WorkBuddy、FRAE 或其他支持 GitHub Skill / Agent 导入的工具，可以直接粘贴本仓库链接：
+
+```text
+https://github.com/weixunkkkkk/gaokao-volunteer-advisor
+```
+
+导入后，选择或调用：
+
+```text
+gaokao-volunteer-advisor
+```
+
+或者使用中文名称：
+
+```text
+高考志愿顾问
+```
+
+推荐输入格式：
+
+```text
+请调用高考志愿顾问 Skill。
+
+考生信息：
+- 省份：广东
+- 科类：物理类
+- 位次：31500
+- 分数：如果没有可以不填
+- 地域偏好：非广东院校
+- 专业兴趣：电气工程、计算机、自动化
+- 目标：推荐冲、稳、保、垫学校，并说明专业就业前景和风险
+```
+
+如果工具要求填写 Skill 来源，填写：
+
+```text
+GitHub Repository
+```
+
+仓库地址填写：
+
+```text
+https://github.com/weixunkkkkk/gaokao-volunteer-advisor
+```
+
+如果工具不支持直接导入 Skill，也可以把仓库 clone 到本地后运行：
+
+```bash
+git clone https://github.com/weixunkkkkk/gaokao-volunteer-advisor.git
+cd gaokao-volunteer-advisor
+python3 -m pip install -r requirements.txt
+python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 31500 --interests 电气,计算机,自动化
+```
+
+## 使用边界
+
+这个 Skill 不是“替你决定报哪所学校”的工具，而是一个基于公开历史数据的参考系统。
+
+它会尽量说明：
+
+- 推荐依据
+- 历史分数和位次
+- 冲稳保垫判断
+- 学校最低线和专业线的差异
+- 专业就业方向
+- 潜在风险
+
+但它不能保证录取结果。正式填报时，仍然需要以各省教育考试院、目标高校招生官网、当年招生计划和最新招生章程为准。
 
 ## 快速运行
 
