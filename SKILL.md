@@ -48,7 +48,7 @@ python3 scripts/audit_data.py --data-dir assets/data --target-years 2023,2024,20
 
 If the audit reports demo data, missing required years, or missing required columns, say that the current result is not ready for real志愿填报.
 
-5. For a simple user-facing run, use `scripts/run_advisor.py`. It discovers verified pilot data directories first. If the province/track is not in pilot data but `/Users/xueweixun/Downloads/各省份` exists, it uses that local Excel bundle as the primary data source:
+5. For a simple user-facing run, use `scripts/run_advisor.py`. It discovers verified pilot and national data directories first. If the province/track is not in normalized CSV data but `assets/raw-data/各省份` exists, it uses that bundled Excel data as the primary fallback. If the bundled data is absent, it can still use a local `~/Downloads/各省份` bundle:
 
 ```bash
 python3 scripts/run_advisor.py --province 上海 --score 555 --interests 人工智能,财经
@@ -63,10 +63,10 @@ python3 scripts/run_advisor.py
 python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 人工智能,新能源
 python3 scripts/recommend.py --province 广东 --track 物理类 --score 600 --rank 43000 --interests 公安 --include-special-plans
 
-If `/Users/xueweixun/Downloads/各省份` exists, `run_advisor.py` automatically treats it as a local Excel bundle. It reads matching 2023-2025 professional admission-score rows, reads one-score-one-rank Excel tables when score is provided without rank, reads `学校所在/学校性质/是否985/是否211`, and adds a `本省/省外重点` section. Use `--raw-data-root /path/to/各省份` to override or `--raw-data-root ""` to disable local Excel reading.
+If `assets/raw-data/各省份` exists, `run_advisor.py` automatically treats it as a bundled nationwide Excel source. It reads matching 2023-2025 professional admission-score rows, reads one-score-one-rank Excel tables when score is provided without rank, reads `学校所在/学校性质/是否985/是否211`, and adds a `本省/省外重点` section. Use `--raw-data-root /path/to/各省份` to override or `--raw-data-root ""` to disable raw Excel reading.
 
-python3 scripts/recommend.py --province 广东 --track 物理类 --rank 50000 --interests 计算机 --raw-data-root /Users/xueweixun/Downloads/各省份 --home-limit 1 --away-limit 5
-python3 scripts/recommend.py --province 湖南 --track 物理类 --score 570 --interests 计算机 --raw-data-root /Users/xueweixun/Downloads/各省份
+python3 scripts/recommend.py --province 广东 --track 物理类 --rank 50000 --interests 计算机 --raw-data-root assets/raw-data/各省份 --home-limit 1 --away-limit 5
+python3 scripts/recommend.py --province 湖南 --track 物理类 --score 570 --interests 计算机 --raw-data-root assets/raw-data/各省份
 ```
 
 Use `--data-dir /path/to/data` when the real CSV files live outside the skill folder.
@@ -162,6 +162,7 @@ Use `--data-dir /path/to/data` when the real CSV files live outside the skill fo
 - `assets/source-discovery/national/gaokao_cn_school_ids.csv` is the exported 掌上高考 school-ID list used by `--schools-csv` national supplemental imports.
 - `assets/source-discovery/jiangsu` contains discovered Jiangsu official sources; it is not yet a usable pilot data directory.
 - `assets/source-discovery/hebei` contains discovered Hebei official sources plus an OCR draft; it is not yet a usable pilot data directory.
+- `assets/raw-data/各省份` contains the bundled nationwide Excel source package used as fallback for provinces and tracks that are not yet normalized into pilot or national CSV directories.
 - `assets/data` contains tiny demo CSVs marked `DEMO_NOT_REAL`; replace or override them with verified provincial and school data before real counseling.
 
 ## Output Standard

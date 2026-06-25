@@ -14,7 +14,9 @@ ROOT = Path(__file__).resolve().parents[1]
 PILOT_DATA_DIR = ROOT / "assets" / "pilot-data"
 NATIONAL_DATA_DIR = ROOT / "assets" / "national-data"
 DEFAULT_DATA_DIR = ROOT / "assets" / "data"
-DEFAULT_LOCAL_BUNDLE_ROOT = Path.home() / "Downloads" / "各省份"
+REPO_BUNDLE_ROOT = ROOT / "assets" / "raw-data" / "各省份"
+USER_BUNDLE_ROOT = Path.home() / "Downloads" / "各省份"
+DEFAULT_LOCAL_BUNDLE_ROOT = REPO_BUNDLE_ROOT if REPO_BUNDLE_ROOT.exists() else USER_BUNDLE_ROOT
 sys.path.insert(0, str(ROOT / "scripts"))
 
 from recommend import build_result, render_markdown  # noqa: E402
@@ -159,7 +161,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--raw-data-root",
         default=str(DEFAULT_LOCAL_BUNDLE_ROOT) if DEFAULT_LOCAL_BUNDLE_ROOT.exists() else "",
-        help="Optional local raw Excel bundle root, e.g. ~/Downloads/各省份",
+        help="Optional raw Excel bundle root, defaults to assets/raw-data/各省份 when bundled, otherwise ~/Downloads/各省份",
     )
     parser.add_argument("--home-province", help="Candidate's home province for in-province/out-of-province picks")
     parser.add_argument("--home-limit", type=int, default=1)
