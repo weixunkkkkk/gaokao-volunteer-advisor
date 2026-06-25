@@ -8,7 +8,7 @@
 
 这个 Skill 的目标不是替考生做决定，也不是告诉你“报哪所学校一定能录取”。它会结合省份、选科（科类）、高考分数、全省位次、兴趣方向等信息，再参考近几年公开录取数据，帮助考生建立一个相对客观的定位参考。
 
-项目现在的定位是：面向全国省份、城市、院校和专业，读取本地或仓库内置的高考 Excel 数据包，按考生位次和兴趣专业生成院校、专业、冲稳保垫与本省/省外推荐。clone 仓库后，默认会优先读取 `assets/raw-data/各省份`，不再依赖我个人电脑上的 `/Users/xueweixun/Downloads/各省份`。
+项目现在的定位是：面向全国省份、城市、院校和专业，读取本地或仓库内置的高考 Excel 数据包，按考生位次和兴趣专业生成院校、专业、冲稳保垫与本省/省外推荐。clone 仓库后，默认会优先读取 `assets/raw-data/各省份`，不依赖任何个人本机路径。
 
 我不希望把它做成一个“玄学推荐学校”的工具。更希望它成为一个能够提供依据、解释逻辑、展示风险边界的参考工具。
 
@@ -61,6 +61,25 @@
 - 公开接口数据
 
 只要能够确认是官方来源，都会尽量拆解到专业层级，并保留来源、附件、缓存路径和导入说明，方便后续交叉核验。
+
+## 复制链接使用
+
+仓库地址：
+
+```text
+https://github.com/weixunkkkkk/gaokao-volunteer-advisor
+```
+
+在支持从 GitHub 安装 Skill 的客户端中，直接粘贴上面的仓库链接即可。仓库根目录已经包含 `SKILL.md` 和 `agents/openai.yaml`，导入后可以用“高考志愿顾问”或 `gaokao-volunteer-advisor` 调用。
+
+本地运行可以直接 clone：
+
+```bash
+git clone https://github.com/weixunkkkkk/gaokao-volunteer-advisor.git
+cd gaokao-volunteer-advisor
+python3 -m pip install -r requirements.txt
+python3 scripts/run_advisor.py --province 广东 --track 物理类 --rank 31500 --interests 电气,计算机,自动化
+```
 
 ## 快速运行
 

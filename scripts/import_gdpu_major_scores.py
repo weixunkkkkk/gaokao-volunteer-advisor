@@ -14,7 +14,7 @@ RAW_DIR = ROOT / "assets" / "raw-cache" / "gdpu"
 SOURCE_NAME = "广东药科大学招生办"
 SCHOOL_NAME = "广东药科大学"
 LIST_URL = "https://zsb.gdpu.edu.cn/"
-PYTHON_HINT = "/Users/xueweixun/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+PYTHON_HINT = "python3"
 
 GENERAL_SOURCES = {
     2025: {

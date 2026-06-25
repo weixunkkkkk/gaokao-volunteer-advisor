@@ -18,7 +18,7 @@ OCR_SCRIPT = ROOT / "scripts" / "vision_ocr_image_zh.swift"
 SOURCE_NAME = "广东工业大学招生办公室"
 SCHOOL_NAME = "广东工业大学"
 LIST_URL = "https://zsb.gdut.edu.cn/xxcx/lqsj.htm"
-PYTHON_HINT = "/Users/xueweixun/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+PYTHON_HINT = "python3"
 
 PAGES = {
     2025: (

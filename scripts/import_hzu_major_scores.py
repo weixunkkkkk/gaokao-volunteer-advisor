@@ -19,7 +19,7 @@ try:
 except ImportError:
     print(
         "This importer needs Pillow. Run it with the bundled Python: "
-        "/Users/xueweixun/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "python3",
         file=sys.stderr,
     )
     raise

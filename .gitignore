@@ -8,4 +8,4 @@ dist/
 build/
 *.zip
 *.tar.gz
-
+assets/raw-cache/_probe/
